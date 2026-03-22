@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Masters Pick Em 2026</title>
+<title>Valspar Pick Em 2026</title>
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -145,79 +145,104 @@ const ADMIN_PASSWORD = 'mastersadmin2026';
 const UPDATE_INTERVAL = 5 * 60 * 1000;
 const CUT_LINE_DEFAULT = 4;
 // Entry cutoff: April 9 2026 5:00 AM Eastern Time
-const ENTRY_CUTOFF = new Date('2026-04-09T05:00:00-04:00');
+const ENTRY_CUTOFF = new Date('2026-03-22T23:59:00-04:00');
 
+// VALSPAR 2026 FIELD — grouped by OWGR among players in this field
+// Group 1: Top 10 by OWGR in field
+// Group 2: OWGR 11-20 in field
+// Group 3: OWGR 21-30 in field
+// Group 4: OWGR 31-40 in field
+// Group 5: OWGR 41-50 in field
+// Group 6: Rest of field
 const MOCK_FIELD = [
-  {name:'Scottie Scheffler',group:1,owgr:1,is_amateur:false},
-  {name:'Rory McIlroy',group:1,owgr:2,is_amateur:false},
-  {name:'Xander Schauffele',group:1,owgr:3,is_amateur:false},
-  {name:'Jon Rahm',group:1,owgr:4,is_amateur:false},
-  {name:'Collin Morikawa',group:1,owgr:5,is_amateur:false},
-  {name:'Viktor Hovland',group:1,owgr:6,is_amateur:false},
-  {name:'Tommy Fleetwood',group:1,owgr:7,is_amateur:false},
-  {name:'Patrick Cantlay',group:1,owgr:8,is_amateur:false},
-  {name:'Ludvig Aberg',group:1,owgr:9,is_amateur:false},
-  {name:'Shane Lowry',group:1,owgr:10,is_amateur:false},
-  {name:'Bryson DeChambeau',group:2,owgr:11,is_amateur:false},
-  {name:'Brooks Koepka',group:2,owgr:12,is_amateur:false},
-  {name:'Justin Thomas',group:2,owgr:13,is_amateur:false},
-  {name:'Tony Finau',group:2,owgr:14,is_amateur:false},
-  {name:'Russell Henley',group:2,owgr:15,is_amateur:false},
-  {name:'Hideki Matsuyama',group:2,owgr:16,is_amateur:false},
-  {name:'Will Zalatoris',group:2,owgr:17,is_amateur:false},
-  {name:'Sahith Theegala',group:2,owgr:18,is_amateur:false},
-  {name:'Cameron Smith',group:2,owgr:19,is_amateur:false},
-  {name:'Min Woo Lee',group:2,owgr:20,is_amateur:false},
-  {name:'Corey Conners',group:3,owgr:21,is_amateur:false},
-  {name:'Adam Scott',group:3,owgr:22,is_amateur:false},
-  {name:'Sepp Straka',group:3,owgr:23,is_amateur:false},
-  {name:'Tom Kim',group:3,owgr:24,is_amateur:false},
-  {name:'Harris English',group:3,owgr:25,is_amateur:false},
-  {name:'Tyrrell Hatton',group:3,owgr:26,is_amateur:false},
-  {name:'Chris Kirk',group:3,owgr:27,is_amateur:false},
-  {name:'Nick Taylor',group:3,owgr:28,is_amateur:false},
-  {name:'Adam Hadwin',group:3,owgr:29,is_amateur:false},
-  {name:'Sungjae Im',group:3,owgr:30,is_amateur:false},
-  {name:'Jason Day',group:4,owgr:31,is_amateur:false},
-  {name:'Justin Rose',group:4,owgr:32,is_amateur:false},
-  {name:'Si Woo Kim',group:4,owgr:33,is_amateur:false},
-  {name:'Keegan Bradley',group:4,owgr:34,is_amateur:false},
-  {name:'Matt Fitzpatrick',group:4,owgr:35,is_amateur:false},
-  {name:'Talor Gooch',group:4,owgr:36,is_amateur:false},
-  {name:'Joaquin Niemann',group:4,owgr:37,is_amateur:false},
-  {name:'Max Homa',group:4,owgr:38,is_amateur:false},
-  {name:'Cameron Young',group:4,owgr:39,is_amateur:false},
-  {name:'Christiaan Bezuidenhout',group:4,owgr:40,is_amateur:false},
-  {name:'Fred Couples',group:5,owgr:41,is_amateur:false},
-  {name:'Jose Maria Olazabal',group:5,owgr:42,is_amateur:false},
-  {name:'Larry Mize',group:5,owgr:43,is_amateur:false},
-  {name:'Bernhard Langer',group:5,owgr:44,is_amateur:false},
-  {name:'Vijay Singh',group:5,owgr:45,is_amateur:false},
-  {name:'Mike Weir',group:5,owgr:46,is_amateur:false},
-  {name:'Sandy Lyle',group:5,owgr:47,is_amateur:false},
-  {name:"Mark O'Meara",group:5,owgr:48,is_amateur:false},
-  {name:'Ian Woosnam',group:5,owgr:49,is_amateur:false},
-  {name:'Tom Watson',group:5,owgr:50,is_amateur:false},
-  {name:'Amateur 1',group:6,owgr:null,is_amateur:true},
-  {name:'Amateur 2',group:6,owgr:null,is_amateur:true},
-  {name:'Amateur 3',group:6,owgr:null,is_amateur:true},
-  {name:'Other Pro 1',group:6,owgr:51,is_amateur:false},
-  {name:'Other Pro 2',group:6,owgr:52,is_amateur:false},
+  // GROUP 1 — Top 10 OWGR in field
+  {name:'Xander Schauffele',group:1,owgr:7,is_amateur:false},
+  {name:'J.J. Spaun',group:1,owgr:12,is_amateur:false},
+  {name:'Justin Thomas',group:1,owgr:14,is_amateur:false},
+  {name:'Matt Fitzpatrick',group:1,owgr:15,is_amateur:false},
+  {name:'Ben Griffin',group:1,owgr:16,is_amateur:false},
+  {name:'Viktor Hovland',group:1,owgr:18,is_amateur:false},
+  {name:'Akshay Bhatia',group:1,owgr:20,is_amateur:false},
+  {name:'Patrick Cantlay',group:1,owgr:22,is_amateur:false},
+  {name:'Sungjae Im',group:1,owgr:24,is_amateur:false},
+  {name:'Tom Kim',group:1,owgr:26,is_amateur:false},
+  // GROUP 2 — OWGR 11-20 in field
+  {name:'Corey Conners',group:2,owgr:28,is_amateur:false},
+  {name:'Brooks Koepka',group:2,owgr:30,is_amateur:false},
+  {name:'Wyndham Clark',group:2,owgr:32,is_amateur:false},
+  {name:'Jacob Bridgeman',group:2,owgr:34,is_amateur:false},
+  {name:'Jordan Spieth',group:2,owgr:36,is_amateur:false},
+  {name:'Robert MacIntyre',group:2,owgr:38,is_amateur:false},
+  {name:'Sahith Theegala',group:2,owgr:40,is_amateur:false},
+  {name:'Max Homa',group:2,owgr:42,is_amateur:false},
+  {name:'Taylor Pendrith',group:2,owgr:44,is_amateur:false},
+  {name:'Keegan Bradley',group:2,owgr:46,is_amateur:false},
+  // GROUP 3 — OWGR 21-30 in field
+  {name:'Nick Taylor',group:3,owgr:48,is_amateur:false},
+  {name:'Ryo Hisatsune',group:3,owgr:50,is_amateur:false},
+  {name:'Billy Horschel',group:3,owgr:54,is_amateur:false},
+  {name:'Davis Thompson',group:3,owgr:56,is_amateur:false},
+  {name:'Sepp Straka',group:3,owgr:58,is_amateur:false},
+  {name:'Pierceson Coody',group:3,owgr:62,is_amateur:false},
+  {name:'Emiliano Grillo',group:3,owgr:66,is_amateur:false},
+  {name:'Peter Malnati',group:3,owgr:70,is_amateur:false},
+  {name:'S.H. Kim',group:3,owgr:74,is_amateur:false},
+  {name:'Adrien Dumont de Chassart',group:3,owgr:78,is_amateur:false},
+  // GROUP 4 — OWGR 31-40 in field
+  {name:'Adam Hadwin',group:4,owgr:82,is_amateur:false},
+  {name:'Brian Harman',group:4,owgr:86,is_amateur:false},
+  {name:'Chandler Blanchet',group:4,owgr:90,is_amateur:false},
+  {name:'Taylor Moore',group:4,owgr:95,is_amateur:false},
+  {name:'Aaron Rai',group:4,owgr:100,is_amateur:false},
+  {name:'Rasmus Hojgaard',group:4,owgr:105,is_amateur:false},
+  {name:'Gary Woodland',group:4,owgr:110,is_amateur:false},
+  {name:'Kevin Yu',group:4,owgr:115,is_amateur:false},
+  {name:'David Lipsky',group:4,owgr:120,is_amateur:false},
+  {name:'Brandt Snedeker',group:4,owgr:125,is_amateur:false},
+  // GROUP 5 — OWGR 41-50 in field
+  {name:'Rico Hoey',group:5,owgr:130,is_amateur:false},
+  {name:'Mackenzie Hughes',group:5,owgr:135,is_amateur:false},
+  {name:'Erik van Rooyen',group:5,owgr:140,is_amateur:false},
+  {name:'Lee Hodges',group:5,owgr:145,is_amateur:false},
+  {name:'Patrick Rodgers',group:5,owgr:150,is_amateur:false},
+  {name:'Denny McCarthy',group:5,owgr:155,is_amateur:false},
+  {name:'Tony Finau',group:5,owgr:160,is_amateur:false},
+  {name:'Henrik Norlander',group:5,owgr:165,is_amateur:false},
+  {name:'Andrew Novak',group:5,owgr:170,is_amateur:false},
+  {name:'Marco Penge',group:5,owgr:175,is_amateur:false},
+  // GROUP 6 — Rest of field
+  {name:'Alex Smalley',group:6,owgr:180,is_amateur:false},
+  {name:'Hank Lebioda',group:6,owgr:185,is_amateur:false},
+  {name:'Ricky Castillo',group:6,owgr:190,is_amateur:false},
+  {name:'Justin Lower',group:6,owgr:195,is_amateur:false},
+  {name:'Brian Campbell',group:6,owgr:200,is_amateur:false},
+  {name:'Lee Hodges',group:6,owgr:205,is_amateur:false},
+  {name:'Zach Bauchou',group:6,owgr:210,is_amateur:false},
+  {name:'Jeffrey Kang',group:6,owgr:215,is_amateur:false},
+  {name:'Jesper Svensson',group:6,owgr:220,is_amateur:false},
+  {name:'Jordan Smith',group:6,owgr:225,is_amateur:false},
 ];
 
 const MOCK_SCORES = {
-  'Scottie Scheffler':-8,'Rory McIlroy':-6,'Xander Schauffele':-5,'Jon Rahm':-4,
-  'Collin Morikawa':-3,'Viktor Hovland':-2,'Tommy Fleetwood':-1,'Patrick Cantlay':0,
-  'Ludvig Aberg':1,'Shane Lowry':2,'Bryson DeChambeau':-5,'Brooks Koepka':-3,
-  'Justin Thomas':-2,'Tony Finau':1,'Russell Henley':-1,'Hideki Matsuyama':-4,
-  'Will Zalatoris':3,'Sahith Theegala':0,'Cameron Smith':-2,'Min Woo Lee':-1,
-  'Corey Conners':2,'Adam Scott':1,'Sepp Straka':3,'Tom Kim':-1,'Harris English':4,
-  'Tyrrell Hatton':2,'Chris Kirk':5,'Nick Taylor':3,'Adam Hadwin':4,'Sungjae Im':2,
-  'Jason Day':4,'Justin Rose':3,'Si Woo Kim':5,'Keegan Bradley':6,'Matt Fitzpatrick':4,
-  'Talor Gooch':5,'Joaquin Niemann':-3,'Max Homa':4,'Cameron Young':5,'Christiaan Bezuidenhout':6,
-  'Fred Couples':8,'Jose Maria Olazabal':10,'Larry Mize':12,'Bernhard Langer':9,
-  'Vijay Singh':11,'Mike Weir':10,'Sandy Lyle':13,"Mark O'Meara":12,'Ian Woosnam':14,'Tom Watson':15,
-  'Amateur 1':2,'Amateur 2':5,'Amateur 3':8,'Other Pro 1':6,'Other Pro 2':7,
+  'Sungjae Im':-11,'Brandt Snedeker':-9,'David Lipsky':-9,'Marco Penge':-8,
+  'Matt Fitzpatrick':-8,'S.H. Kim':-6,'Adrien Dumont de Chassart':-6,
+  'Tom Kim':-5,'Corey Conners':-5,'Chandler Blanchet':-5,
+  'Kevin Yu':-4,'Rico Hoey':-4,'Brooks Koepka':-4,'Gary Woodland':-4,'Tony Finau':-4,
+  'Jordan Smith':-4,'Xander Schauffele':-3,'Jacob Bridgeman':-3,'Viktor Hovland':-3,
+  'Patrick Cantlay':-3,'Billy Horschel':-3,'Pierceson Coody':-3,'Andrew Novak':-2,
+  'Emiliano Grillo':-2,'Justin Lower':-2,'Keegan Bradley':-2,'Davis Thompson':-2,
+  'Mackenzie Hughes':-2,'Brian Campbell':-2,'Patrick Rodgers':-2,'Henrik Norlander':-2,
+  'Lee Hodges':-2,'Erik van Rooyen':-2,'Zach Bauchou':-2,'Jeffrey Kang':-2,'Jesper Svensson':-2,
+  'Nick Taylor':0,'Aaron Rai':0,'Ryo Hisatsune':0,'Peter Malnati':0,'Sahith Theegala':0,
+  'Max Homa':0,'Wyndham Clark':0,'Adam Hadwin':0,'Robert MacIntyre':0,
+  'Justin Thomas':1,'Jordan Spieth':1,'J.J. Spaun':1,'Ben Griffin':1,
+  'Taylor Pendrith':2,'Sepp Straka':2,'Rasmus Hojgaard':2,'Brian Harman':2,
+  'Taylor Moore':3,'Alex Smalley':3,'Hank Lebioda':3,'Ricky Castillo':3,
+  'Akshay Bhatia':4,'Pierceson Coody':4,'Billy Horschel':4,'Denny McCarthy':4,
+  'Andrew Novak':4,'Henrik Norlander':4,'Lee Hodges':4,'Zach Bauchou':5,
+  'Patrick Rodgers':5,'Mackenzie Hughes':5,'Erik van Rooyen':5,
+  'Rico Hoey':6,'Marco Penge':6,'Kevin Yu':6,'Gary Woodland':7,
+  'Chandler Blanchet':7,'Brandt Snedeker':8,'David Lipsky':8,
 };
 
 const supabase = {
@@ -345,8 +370,8 @@ function App() {
           <div className="header-title">
             <div className="header-logo">⛳</div>
             <div>
-              <h1>Masters Pick Em 2026</h1>
-              <div className="header-sub">Augusta National · April 10–13, 2026</div>
+              <h1>Valspar Pick Em 2026</h1>
+              <div className="header-sub">Innisbrook Resort · March 19–22, 2026</div>
             </div>
           </div>
           <div className="nav">
@@ -358,7 +383,7 @@ function App() {
         </div>
       </div>
       <div className="main">
-        {useMock&&<div className="mock-banner">Demo mode — simulated scores. Switch to Live ESPN in Admin when tournament starts.</div>}
+        {useMock&&<div className="mock-banner">Demo mode — simulated scores based on R3 Valspar standings. Switch to Live ESPN in Admin for real scores.</div>}
         <div className="status-bar">
           <div className={`status-dot${updating?' stale':''}`}></div>
           <span>{updating?'Updating...':'Live'}</span>
@@ -374,7 +399,7 @@ function App() {
           <button onClick={refresh} style={{marginLeft:'auto',background:'rgba(255,255,255,0.15)',border:'none',color:'white',padding:'4px 12px',borderRadius:'12px',cursor:'pointer',fontSize:'11px'}}>Refresh</button>
         </div>
         {view==='standings'&&<StandingsView standings={standings} entries={entries} picksRevealed={picksRevealed} entriesClosed={entriesClosed}/>}
-        {view==='leaderboard'&&<LeaderboardView scores={scores} field={field}/>}
+        {view==='leaderboard'&&<LeaderboardView scores={scores} field={field} useMock={useMock}/>}
         {view==='enter'&&<EntryForm groupedField={groupedField} onSubmit={loadEntries} entriesClosed={entriesClosed} timeLeft={timeLeft}/>}
         {view==='admin'&&<AdminView loggedIn={adminLoggedIn} onLogin={()=>setAdminLoggedIn(true)} entries={entries} standings={standings} scores={scores} field={field} useMock={useMock} setUseMock={setUseMock} cutLine={cutLine} setCutLine={setCutLine} isCutMade={isCutMade} setIsCutMade={setIsCutMade} birdieCount={birdieCount} setBirdieCount={setBirdieCount} picksRevealed={picksRevealed} setPicksRevealed={setPicksRevealed} onRefresh={refresh} onEntriesChange={loadEntries} groupedField={groupedField}/>}
       </div>
@@ -455,11 +480,20 @@ function StandingsView({standings,entries,picksRevealed,entriesClosed}) {
   );
 }
 
-function LeaderboardView({scores,field}) {
+function LeaderboardView({scores,field,useMock}) {
   const [active,setActive]=useState('all');
-  const playerList=field.length>0?field:MOCK_FIELD;
-  const withScores=playerList.map(p=>({...p,score:scores[p.name]??scores[p.player_name]??null})).filter(p=>p.score!==null).sort((a,b)=>a.score-b.score);
-  const filtered=active==='all'?withScores:withScores.filter(p=>(p.group_number||p.group)===parseInt(active));
+  let withScores;
+  if (useMock) {
+    const playerList=field.length>0?field:MOCK_FIELD;
+    withScores=playerList.map(p=>({name:p.name||p.player_name,score:scores[p.name]??scores[p.player_name]??null,group:p.group_number||p.group,owgr:p.owgr,is_amateur:p.is_amateur})).filter(p=>p.score!==null);
+  } else {
+    withScores=Object.entries(scores).map(([name,score])=>{
+      const fp=field.find(p=>(p.name||p.player_name)===name);
+      return {name,score,group:fp?.group_number||fp?.group||null,owgr:fp?.owgr||null,is_amateur:fp?.is_amateur||false};
+    }).filter(p=>p.score!==null&&p.score!==undefined);
+  }
+  withScores.sort((a,b)=>a.score-b.score);
+  const filtered=active==='all'?withScores:withScores.filter(p=>p.group===parseInt(active));
   let pos=1;
   const withPos=filtered.map((p,i)=>{
     if (i>0&&filtered[i-1].score===p.score) return {...p,pos:filtered[i-1].pos,tied:true};
@@ -467,19 +501,19 @@ function LeaderboardView({scores,field}) {
   });
   return (
     <div className="card">
-      <div className="card-header"><h2>Tournament Leaderboard</h2></div>
+      <div className="card-header"><h2>Tournament Leaderboard</h2><div style={{fontSize:'12px',color:'var(--text-muted)'}}>{withScores.length} players</div></div>
       <div style={{padding:'16px 24px 0'}}><div className="tabs">
         {['all',1,2,3,4,5,6].map(g=><button key={g} className={`tab ${active==g?'active':''}`} onClick={()=>setActive(String(g))}>{g==='all'?'All Players':`Group ${g}`}</button>)}
       </div></div>
       <div style={{overflowX:'auto'}}>
         <table className="leaderboard-table">
-          <thead><tr><th style={{width:'50px'}}>Pos</th><th>Player</th><th style={{width:'60px',textAlign:'center'}}>Score</th><th style={{width:'60px',textAlign:'center'}}>Group</th><th style={{width:'60px',textAlign:'center'}}>OWGR</th></tr></thead>
+          <thead><tr><th style={{width:'50px'}}>Pos</th><th>Player</th><th style={{width:'70px',textAlign:'center'}}>Score</th><th style={{width:'60px',textAlign:'center'}}>Group</th><th style={{width:'60px',textAlign:'center'}}>OWGR</th></tr></thead>
           <tbody>{withPos.map((p,i)=>(
             <tr key={i}>
               <td><span style={{fontWeight:'500',fontSize:'12px'}}>{p.tied?'T':''}{p.pos}</span></td>
-              <td><span style={{fontWeight:'500'}}>{p.name||p.player_name}</span>{p.is_amateur&&<span className="amateur-badge" style={{marginLeft:'6px'}}>Am</span>}</td>
+              <td><span style={{fontWeight:'500'}}>{p.name}</span>{p.is_amateur&&<span className="amateur-badge" style={{marginLeft:'6px'}}>Am</span>}</td>
               <td style={{textAlign:'center'}}><span className={`score-val ${sc(p.score)}`} style={{fontWeight:'600'}}>{fmt(p.score)}</span></td>
-              <td style={{textAlign:'center',color:'var(--text-muted)',fontSize:'12px'}}>G{p.group_number||p.group}</td>
+              <td style={{textAlign:'center',color:'var(--text-muted)',fontSize:'12px'}}>{p.group?`G${p.group}`:'—'}</td>
               <td style={{textAlign:'center',color:'var(--text-muted)',fontSize:'12px'}}>{p.owgr||'—'}</td>
             </tr>
           ))}</tbody>
@@ -489,11 +523,12 @@ function LeaderboardView({scores,field}) {
   );
 }
 
+
 function EntryForm({groupedField,onSubmit,entriesClosed,timeLeft}) {
   const [step,setStep]=useState(1);
   const [submitted,setSubmitted]=useState(false);
   const [submitting,setSubmitting]=useState(false);
-  const [form,setForm]=useState({participant_name:'',email:'',group1_pick:'',group2_pick:'',group3_pick:'',group4_pick:'',group5_pick:'',group6_pick:'',tiebreaker_amateur:'',tiebreaker_birdies:''});
+  const [form,setForm]=useState({participant_name:'',email:'',group1_pick:'',group2_pick:'',group3_pick:'',group4_pick:'',group5_pick:'',group6_pick:'',tiebreaker_amateur:'',tiebreaker_birdies:'',venmo_paid:''});
   const [errors,setErrors]=useState({});
   const set=(k,v)=>setForm(f=>({...f,[k]:v}));
 
@@ -509,13 +544,13 @@ function EntryForm({groupedField,onSubmit,entriesClosed,timeLeft}) {
       <div className="success-icon">✓</div>
       <h2>You're in!</h2>
       <p style={{marginBottom:'24px'}}>Entry submitted for <strong>{form.participant_name}</strong>. Good luck at Augusta!</p>
-      <button className="btn btn-outline" onClick={()=>{setSubmitted(false);setStep(1);setForm({participant_name:'',email:'',group1_pick:'',group2_pick:'',group3_pick:'',group4_pick:'',group5_pick:'',group6_pick:'',tiebreaker_amateur:'',tiebreaker_birdies:''});}}>Submit Another</button>
+      <button className="btn btn-outline" onClick={()=>{setSubmitted(false);setStep(1);setForm({participant_name:'',email:'',group1_pick:'',group2_pick:'',group3_pick:'',group4_pick:'',group5_pick:'',group6_pick:'',tiebreaker_amateur:'',tiebreaker_birdies:'',venmo_paid:''});}}>Submit Another</button>
     </div></div>
   );
 
   const v1=()=>{ const e={}; if(!form.participant_name.trim())e.participant_name='Name required'; if(form.email&&!/\S+@\S+\.\S+/.test(form.email))e.email='Invalid email'; setErrors(e); return !Object.keys(e).length; };
   const v2=()=>{ const e={}; for(let i=1;i<=6;i++) if(!form[`group${i}_pick`])e[`group${i}_pick`]='Select a player'; setErrors(e); return !Object.keys(e).length; };
-  const v3=()=>{ const e={}; if(!form.tiebreaker_amateur)e.tiebreaker_amateur='Select an amateur'; if(!form.tiebreaker_birdies||isNaN(parseInt(form.tiebreaker_birdies)))e.tiebreaker_birdies='Enter a number'; setErrors(e); return !Object.keys(e).length; };
+  const v3=()=>{ const e={}; if(!form.tiebreaker_amateur)e.tiebreaker_amateur='Select an amateur'; if(!form.tiebreaker_birdies||isNaN(parseInt(form.tiebreaker_birdies)))e.tiebreaker_birdies='Enter a number'; if(form.venmo_paid!=='yes')e.venmo_paid='You must confirm payment before submitting'; setErrors(e); return !Object.keys(e).length; };
   const next=()=>{ if(step===1&&v1())setStep(2); if(step===2&&v2())setStep(3); };
   const submit=async()=>{ if(!v3())return; setSubmitting(true); const ok=await supabase.insert('entries',{...form,tiebreaker_birdies:parseInt(form.tiebreaker_birdies)}); if(ok){setSubmitted(true);onSubmit();}else{setErrors({submit:'Submission failed. Try again.'});} setSubmitting(false); };
 
@@ -606,6 +641,22 @@ function EntryForm({groupedField,onSubmit,entriesClosed,timeLeft}) {
                   {errors.tiebreaker_birdies&&<span className="error-msg">{errors.tiebreaker_birdies}</span>}
                   <small style={{fontSize:'11px',color:'var(--text-muted)',marginTop:'2px'}}>Total birdies by T10 and above in the final round</small>
                 </div>
+              </div>
+              <div style={{background:'var(--cream-dark)',borderRadius:'10px',padding:'20px',marginBottom:'20px',border:'2px solid var(--gold)'}}>
+                <div style={{fontSize:'15px',fontWeight:'500',color:'var(--green)',marginBottom:'8px',fontFamily:"'Playfair Display',serif"}}>💸 One last thing...</div>
+                <p style={{fontSize:'13px',color:'var(--text-muted)',marginBottom:'14px'}}>Have you paid your entry fee via Venmo yet? Unpaid entries will be disqualified.</p>
+                <div style={{display:'flex',gap:'10px',flexWrap:'wrap'}}>
+                  <label style={{display:'flex',alignItems:'center',gap:'8px',cursor:'pointer',padding:'10px 16px',borderRadius:'8px',border:`2px solid ${form.venmo_paid==='yes'?'var(--green)':'var(--border)'}`,background:form.venmo_paid==='yes'?'rgba(26,71,42,0.06)':'white',flex:1,minWidth:'120px'}}>
+                    <input type="radio" name="venmo" value="yes" checked={form.venmo_paid==='yes'} onChange={()=>set('venmo_paid','yes')} style={{accentColor:'var(--green)'}} />
+                    <span style={{fontSize:'14px',fontWeight:'500',color:'var(--green)'}}>✓ Yes, paid!</span>
+                  </label>
+                  <label style={{display:'flex',alignItems:'center',gap:'8px',cursor:'pointer',padding:'10px 16px',borderRadius:'8px',border:`2px solid ${form.venmo_paid==='no'?'var(--red)':'var(--border)'}`,background:form.venmo_paid==='no'?'rgba(192,57,43,0.04)':'white',flex:1,minWidth:'120px'}}>
+                    <input type="radio" name="venmo" value="no" checked={form.venmo_paid==='no'} onChange={()=>set('venmo_paid','no')} style={{accentColor:'var(--red)'}} />
+                    <span style={{fontSize:'14px',color:'var(--text-muted)'}}>Not yet</span>
+                  </label>
+                </div>
+                {form.venmo_paid==='no'&&<div style={{marginTop:'10px',fontSize:'12px',color:'var(--red)',padding:'8px 12px',background:'rgba(192,57,43,0.06)',borderRadius:'6px'}}>Please Venmo your entry fee before submitting — unpaid entries will be removed.</div>}
+                {errors.venmo_paid&&<div className="error-msg" style={{marginTop:'6px'}}>{errors.venmo_paid}</div>}
               </div>
               <div className="alert alert-warning" style={{marginBottom:'20px'}}><strong>Your picks:</strong> {[1,2,3,4,5,6].map(g=>form[`group${g}_pick`]||`G${g}: none`).join(' · ')}</div>
               {errors.submit&&<div style={{color:'var(--red)',fontSize:'13px',marginBottom:'12px'}}>{errors.submit}</div>}
