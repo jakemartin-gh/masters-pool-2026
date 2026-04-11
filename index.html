@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+
+<meta property="og:title" content="Masters Pick Em 2026" />
+<meta property="og:description" content="Pick your 6 golfers from odds-based groups, best 5 scores count. Join at pickem.golf" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://pickem.golf" />
+<meta property="og:image" content="https://pickem.golf/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Masters Pick Em 2026" />
+<meta name="twitter:description" content="Pick your 6 golfers from odds-based groups, best 5 scores count. Join at pickem.golf" />
+<meta name="twitter:image" content="https://pickem.golf/og.png" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛳</text></svg>">
+  <title>Masters Pick Em 2026</title>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green: #1a472a; --green-mid: #2d6a4f; --green-light: #40916c;
+    --gold: #c9a84c; --gold-light: #e9c46a;
+    --cream: #fafafa; --cream-dark: #f2f2f2;
+    --text: #111111; --text-muted: #555555; --text-light: #999;
+    --border: rgba(0,0,0,0.08); --red: #c0392b;
+    --shadow: 0 1px 8px rgba(0,0,0,0.06); --shadow-lg: 0 8px 32px rgba(0,0,0,0.10);
+  }
+  body { font-family: 'Inter', sans-serif; background: #f7f7f5; color: var(--text); min-height: 100vh; }
+  h1,h2,h3,h4 { font-family: 'Cormorant Garamond', serif; }
+  .header { background: var(--green); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
+  .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 12px; height: 64px; }
+  .header-title { display: flex; align-items: center; gap: 14px; }
+  .header-logo { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .header h1 { font-size: 22px; color: white; font-weight: 600; letter-spacing: 0.3px; font-family: 'Cormorant Garamond', serif; }
+  .header-divider { width: 1px; height: 20px; background: rgba(255,255,255,0.25); }
+  .header-sub { font-size: 12px; color: rgba(255,255,255,0.65); font-weight: 400; font-family: 'Inter', sans-serif; letter-spacing: 0.3px; }
+  .nav { display: flex; gap: 2px; flex-wrap: wrap; }
+  .nav button { background: transparent; border: none; color: rgba(255,255,255,0.75); padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; font-family: 'Inter',sans-serif; transition: all 0.15s; font-weight: 400; }
+  .nav button:hover { background: rgba(255,255,255,0.1); color: white; }
+  .nav button.active { background: rgba(255,255,255,0.15); color: white; font-weight: 500; }
+  .nav button.enter-picks { background: var(--gold); color: white; font-weight: 600; border-radius: 20px; padding: 8px 18px; }
+  .nav button.enter-picks:hover { background: #b8933e; }
+  .nav button.enter-picks.active { background: var(--green); }
+  .mobile-nav { display: none; }
+  @media (max-width: 768px) {
+    .header-inner { padding: 0 16px; height: 56px; }
+    .header h1 { font-size: 18px; }
+    .header-sub { display: none; }
+    .header-divider { display: none; }
+    .nav { display: none; }
+    .mobile-nav { display: flex; position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid rgba(0,0,0,0.08); z-index: 200; padding: 6px 0 8px; padding-bottom: calc(6px + env(safe-area-inset-bottom)); }
+    .mobile-nav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; background: none; border: none; cursor: pointer; font-family: 'Inter',sans-serif; padding: 4px 2px; color: var(--text-muted); font-size: 10px; font-weight: 400; transition: color 0.15s; }
+    .mobile-nav-btn.active { color: var(--green); }
+    .mobile-nav-btn.active svg { stroke: var(--green); }
+    .mobile-nav-btn svg { stroke: var(--text-muted); transition: stroke 0.15s; }
+    .mobile-nav-btn.enter-btn { color: var(--gold); font-weight: 600; }
+    .mobile-nav-btn.enter-btn svg { stroke: var(--gold); }
+    .mobile-nav-btn.active.enter-btn { color: var(--green); }
+    .mobile-nav-btn.active.enter-btn svg { stroke: var(--green); }
+    .main { padding: 16px 12px 80px; }
+    .standings-table { font-size: 12px; }
+    .group-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .edit-grid { grid-template-columns: 1fr; }
+    .picks-row { display: none; }
+    .card-header { padding: 14px 16px 12px; }
+    .card-body { padding: 16px; }
+    .status-bar { padding: 8px 12px; gap: 8px; font-size: 11px; border-radius: 6px; }
+    .standings-table th { font-size: 10px; padding: 8px; }
+    .standings-table td { padding: 10px 8px; }
+  }
+  .main { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+  .status-bar { background: var(--green); color: white; padding: 8px 16px; border-radius: 8px; display: flex; align-items: center; gap: 12px; font-size: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; animation: pulse 2s infinite; flex-shrink: 0; }
+  .status-dot.stale { background: #fbbf24; animation: none; }
+  @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
+  .sep { color: rgba(255,255,255,0.3); }
+  .card { background: white; border-radius: 8px; box-shadow: var(--shadow); border: 1px solid rgba(0,0,0,0.07); overflow: hidden; }
+  .card-header { padding: 20px 24px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  .card-header h2 { font-size: 20px; color: var(--green); font-weight: 600; letter-spacing: 0.2px; }
+  .card-body { padding: 24px; }
+  .standings-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .standings-table th { text-align: left; padding: 10px 12px; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); border-bottom: 2px solid var(--border); }
+  .standings-table td { padding: 12px; border-bottom: 1px solid rgba(0,0,0,0.05); vertical-align: middle; }
+  .standings-table tr:last-child td { border-bottom: none; }
+  .standings-table tr:hover td { background: rgba(26,71,42,0.02); }
+  .standings-table tr.in-money td { background: rgba(201,168,76,0.08); }
+  .standings-table tr.in-money-tied td { background: rgba(201,168,76,0.06); }
+  .rank-badge { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; background: var(--cream-dark); color: var(--text-muted); }
+  .picks-row { display: flex; gap: 4px; flex-wrap: wrap; }
+  .pick-chip { padding: 3px 8px; border-radius: 4px; font-size: 11px; background: var(--cream-dark); color: var(--text); white-space: nowrap; }
+  .pick-chip.worst { background: rgba(192,57,43,0.12); color: var(--red); text-decoration: line-through; }
+  .pick-chip.wd { background: rgba(100,100,100,0.12); color: var(--text-muted); text-decoration: line-through; }
+  .pick-chip.cut { background: rgba(100,100,100,0.1); color: var(--text-muted); }
+  .score-val { font-weight: 500; }
+  .score-val.under { color: var(--green-light); }
+  .score-val.over { color: var(--red); }
+  .score-val.even { color: var(--text-muted); }
+  .group-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 16px; margin-bottom: 24px; }
+  .group-card { background: white; border-radius: 10px; border: 1px solid var(--border); overflow: hidden; }
+  .group-card-header { padding: 12px 16px; background: var(--green); color: white; display: flex; align-items: center; justify-content: space-between; letter-spacing: 0.2px; }
+  .group-card-header span { font-size: 13px; font-weight: 500; }
+  .owgr-range { font-size: 11px; color: rgba(255,255,255,0.6); }
+  .group-player { display: flex; align-items: center; padding: 9px 16px; border-bottom: 1px solid rgba(0,0,0,0.04); cursor: pointer; transition: background 0.15s; gap: 10px; }
+  .group-player:last-child { border-bottom: none; }
+  .group-player:hover { background: rgba(26,71,42,0.04); }
+  .group-player.selected { background: rgba(26,71,42,0.08); }
+  .group-player input[type=radio] { accent-color: var(--green); width: 15px; height: 15px; flex-shrink: 0; }
+  .group-player-name { font-size: 13px; flex: 1; }
+  .group-player-owgr { font-size: 11px; color: var(--text-light); }
+  .amateur-badge { font-size: 10px; background: rgba(201,168,76,0.2); color: #8a6e1a; padding: 1px 6px; border-radius: 10px; font-weight: 500; }
+  .entry-form { max-width: 760px; margin: 0 auto; }
+  .form-section-title { font-size: 16px; color: var(--green); margin-bottom: 4px; font-family: 'Cormorant Garamond',serif; }
+  .form-section-sub { font-size: 12px; color: var(--text-muted); margin-bottom: 14px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .form-field { display: flex; flex-direction: column; gap: 5px; }
+  .form-field label { font-size: 12px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.6px; }
+  .form-field input,.form-field select { padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; font-family: 'DM Sans',sans-serif; background: white; color: var(--text); outline: none; transition: border 0.2s; }
+  .form-field input:focus,.form-field select:focus { border-color: var(--green-light); box-shadow: 0 0 0 3px rgba(64,145,108,0.1); }
+  .form-field input.error { border-color: var(--red); }
+  .error-msg { font-size: 11px; color: var(--red); }
+  .btn { padding: 11px 24px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans',sans-serif; border: none; }
+  .btn-primary { background: var(--green); color: white; }
+  .btn-primary:hover { background: var(--green-mid); }
+  .btn-primary:disabled { background: var(--text-light); cursor: not-allowed; }
+  .btn-outline { background: transparent; border: 1px solid var(--green); color: var(--green); }
+  .btn-outline:hover { background: rgba(26,71,42,0.05); }
+  .btn-gold { background: var(--gold); color: white; }
+  .btn-gold:hover { background: #b8933e; }
+  .btn-sm { padding: 6px 14px; font-size: 12px; border-radius: 6px; }
+  .success-screen { text-align: center; padding: 48px 24px; }
+  .success-icon { width: 64px; height: 64px; background: rgba(26,71,42,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 28px; }
+  .leaderboard-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .leaderboard-table th { text-align: left; padding: 8px 10px; font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); border-bottom: 2px solid var(--border); }
+  .leaderboard-table td { padding: 9px 10px; border-bottom: 1px solid rgba(0,0,0,0.04); }
+  .leaderboard-table tr:hover td { background: rgba(0,0,0,0.02); }
+  .admin-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .admin-table th { text-align: left; padding: 8px 10px; font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.7px; color: var(--text-muted); border-bottom: 2px solid var(--border); white-space: nowrap; }
+  .admin-table td { padding: 9px 10px; border-bottom: 1px solid rgba(0,0,0,0.04); vertical-align: middle; }
+  .login-box { max-width: 360px; margin: 80px auto; background: white; border-radius: 12px; box-shadow: var(--shadow-lg); padding: 36px; text-align: center; }
+  .tabs { display: flex; border-bottom: 2px solid var(--border); margin-bottom: 24px; overflow-x: auto; }
+  .tab { padding: 10px 20px; font-size: 13px; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; color: var(--text-muted); transition: all 0.2s; font-family: 'DM Sans',sans-serif; background: none; border-top: none; border-left: none; border-right: none; white-space: nowrap; }
+  .tab:hover { color: var(--green); }
+  .tab.active { color: var(--green); border-bottom-color: var(--green); font-weight: 500; }
+  .alert { padding: 12px 16px; border-radius: 8px; font-size: 13px; margin-bottom: 16px; }
+  .alert-warning { background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3); color: #7a5c1a; }
+  .alert-info { background: rgba(26,71,42,0.08); border: 1px solid rgba(26,71,42,0.2); color: var(--green); }
+  .tiebreaker-panel { background: var(--cream-dark); border-radius: 8px; padding: 16px; margin-top: 16px; }
+  .tiebreaker-panel h4 { font-size: 13px; color: var(--green); margin-bottom: 10px; font-family: 'Cormorant Garamond',serif; }
+  .tiebreaker-row { display: flex; align-items: center; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid rgba(0,0,0,0.06); font-size: 12px; flex-wrap: wrap; gap: 6px; }
+  .tiebreaker-row:last-child { border-bottom: none; }
+
+  .standings-toolbar { display: flex; align-items: center; gap: 10px; padding: 14px 24px 0; flex-wrap: wrap; }
+  .standings-search { flex: 1; min-width: 160px; display: flex; align-items: center; gap: 8px; background: #f7f7f5; border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; padding: 8px 12px; }
+  .standings-search input { border: none; background: transparent; outline: none; font-size: 13px; font-family: 'Inter',sans-serif; color: var(--text); width: 100%; }
+  .standings-search input::placeholder { color: var(--text-light); }
+  .starred-section { background: rgba(201,168,76,0.06); border-bottom: 1px solid rgba(201,168,76,0.2); }
+  .starred-label { padding: 8px 24px 4px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); font-family: 'Inter',sans-serif; }
+  .star-btn { background: none; border: none; cursor: pointer; padding: 2px 4px; font-size: 16px; line-height: 1; opacity: 0.4; transition: opacity 0.15s, transform 0.15s; flex-shrink: 0; }
+  .star-btn:hover { opacity: 0.7; transform: scale(1.2); }
+  .star-btn.starred { opacity: 1; }
+  .search-clear { background: none; border: none; cursor: pointer; color: var(--text-light); font-size: 16px; line-height: 1; padding: 0; }
+
+
+  .rules-card { background: white; border-radius: 8px; box-shadow: var(--shadow); border: 1px solid rgba(0,0,0,0.07); overflow: hidden; margin-bottom: 20px; }
+  .rules-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; background: none; border: none; cursor: pointer; font-family: 'Cormorant Garamond',serif; font-size: 18px; font-weight: 600; color: var(--green); text-align: left; }
+  .rules-toggle:hover { background: rgba(26,71,42,0.02); }
+  .rules-toggle-icon { font-size: 12px; color: var(--text-muted); transition: transform 0.2s; font-family: 'Inter',sans-serif; display: flex; align-items: center; gap: 6px; }
+  .rules-toggle-icon.open { transform: rotate(180deg); }
+  .rules-body { padding: 0 24px 24px; border-top: 1px solid rgba(0,0,0,0.06); }
+  .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  .rules-block { background: #f7f7f5; border-radius: 8px; padding: 16px; }
+  .rules-block h4 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--green); margin-bottom: 8px; font-family: 'Inter',sans-serif; }
+  .rules-block p { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0; }
+  .rules-block ul { font-size: 13px; color: var(--text-muted); line-height: 1.7; margin: 0; padding-left: 16px; }
+  .rules-block li { margin-bottom: 2px; }
+  .rules-highlight { background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.25); border-radius: 8px; padding: 12px 16px; margin-top: 14px; font-size: 12px; color: #7a5c1a; line-height: 1.6; }
+  @media (max-width: 768px) { .rules-grid { grid-template-columns: 1fr; } .rules-toggle { padding: 14px 16px; font-size: 16px; } .rules-body { padding: 0 16px 16px; } }
+
+
+  .payout-banner { display: flex; gap: 8px; padding: 14px 24px; background: rgba(201,168,76,0.06); border-bottom: 1px solid rgba(201,168,76,0.15); flex-wrap: wrap; align-items: center; }
+  .payout-pill { display: flex; flex-direction: column; align-items: center; background: white; border: 1px solid rgba(201,168,76,0.3); border-radius: 8px; padding: 8px 14px; min-width: 70px; }
+  .payout-place { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); font-family: 'Inter',sans-serif; margin-bottom: 3px; }
+  .payout-amount { font-size: 16px; font-weight: 600; color: var(--green); font-family: 'Cormorant Garamond',serif; }
+  .payout-empty { font-size: 13px; color: var(--text-light); }
+
+  .spinner { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .locked-entries-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(150px,1fr)); gap: 10px; padding: 20px 24px; }
+  .locked-entry-chip { background: var(--cream-dark); border-radius: 8px; padding: 12px 14px; font-size: 14px; font-weight: 500; color: var(--text); text-align: center; }
+  .countdown-pill { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); border-radius: 8px; padding: 9px 14px; font-size: 12px; color: #7a5c1a; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 16px; }
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .modal { background: white; border-radius: 12px; padding: 28px; max-width: 680px; width: 100%; max-height: 88vh; overflow-y: auto; box-shadow: var(--shadow-lg); }
+  .modal h3 { color: var(--green); margin-bottom: 3px; font-size: 18px; }
+  .modal-sub { color: var(--text-muted); font-size: 13px; margin-bottom: 20px; }
+  .edit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  .edit-group { display: flex; flex-direction: column; gap: 5px; }
+  .edit-group label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-muted); }
+  .edit-group select,.edit-group input { width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; font-family: 'DM Sans',sans-serif; background: white; color: var(--text); outline: none; }
+  .edit-group select:focus,.edit-group input:focus { border-color: var(--green-light); box-shadow: 0 0 0 3px rgba(64,145,108,0.1); }
+
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+
+const SUPABASE_URL = 'https://pecyagpoxzzwagcpbxzg.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_42W_YT-ZQDs_uorsuN21mA_vQnDBLzP';
+const ADMIN_PASSWORD = 'mastersadmin2026';
+const UPDATE_INTERVAL = 2 * 60 * 1000;
+const CUT_LINE_DEFAULT = 4;
+// Entry cutoff: April 8 2026 8:00 PM Eastern Time
+const ENTRY_CUTOFF = new Date('2026-04-08T21:00:00-04:00');
+
+// VALSPAR 2026 FIELD — grouped by OWGR among players in this field
+// Group 1: Top 10 by OWGR in field
+// Group 2: OWGR 11-20 in field
+// Group 3: OWGR 21-30 in field
+// Group 4: OWGR 31-40 in field
+// Group 5: OWGR 41-50 in field
+// Group 6: Rest of field
+// MASTERS 2026 — 91 players, grouped by betting odds (CBS Sports/FanDuel)
+const MOCK_FIELD = [
+  {name:'Scottie Scheffler',group:1,odds:500,is_amateur:false},
+  {name:'Bryson DeChambeau',group:1,odds:1000,is_amateur:false},
+  {name:'Jon Rahm',group:1,odds:1000,is_amateur:false},
+  {name:'Rory McIlroy',group:1,odds:1200,is_amateur:false},
+  {name:'Xander Schauffele',group:1,odds:1600,is_amateur:false},
+  {name:'Ludvig Aberg',group:1,odds:1600,is_amateur:false},
+  {name:'Matt Fitzpatrick',group:1,odds:2200,is_amateur:false},
+  {name:'Cameron Young',group:1,odds:2200,is_amateur:false},
+  {name:'Tommy Fleetwood',group:1,odds:2200,is_amateur:false},
+  {name:'Justin Rose',group:1,odds:3000,is_amateur:false},
+  {name:'Robert MacIntyre',group:2,odds:3300,is_amateur:false},
+  {name:'Patrick Reed',group:2,odds:3300,is_amateur:false},
+  {name:'Collin Morikawa',group:2,odds:3500,is_amateur:false},
+  {name:'Hideki Matsuyama',group:2,odds:4000,is_amateur:false},
+  {name:'Jordan Spieth',group:2,odds:4000,is_amateur:false},
+  {name:'Brooks Koepka',group:2,odds:4000,is_amateur:false},
+  {name:'Min Woo Lee',group:2,odds:4000,is_amateur:false},
+  {name:'Si Woo Kim',group:2,odds:4500,is_amateur:false},
+  {name:'Chris Gotterup',group:2,odds:5000,is_amateur:false},
+  {name:'Viktor Hovland',group:2,odds:5000,is_amateur:false},
+  {name:'Russell Henley',group:3,odds:5500,is_amateur:false},
+  {name:'Shane Lowry',group:3,odds:6000,is_amateur:false},
+  {name:'Akshay Bhatia',group:3,odds:6000,is_amateur:false},
+  {name:'Adam Scott',group:3,odds:6500,is_amateur:false},
+  {name:'Justin Thomas',group:3,odds:6500,is_amateur:false},
+  {name:'Sepp Straka',group:3,odds:7000,is_amateur:false},
+  {name:'Tyrrell Hatton',group:3,odds:7000,is_amateur:false},
+  {name:'Patrick Cantlay',group:3,odds:7000,is_amateur:false},
+  {name:'Jason Day',group:3,odds:7000,is_amateur:false},
+  {name:'Jake Knapp',group:3,odds:8000,is_amateur:false},
+  {name:'Jacob Bridgeman',group:4,odds:8000,is_amateur:false},
+  {name:'Marco Penge',group:4,odds:8000,is_amateur:false},
+  {name:'Sungjae Im',group:4,odds:10000,is_amateur:false},
+  {name:'Sam Burns',group:4,odds:10000,is_amateur:false},
+  {name:'Harris English',group:4,odds:10000,is_amateur:false},
+  {name:'Corey Conners',group:4,odds:10000,is_amateur:false},
+  {name:'J.J. Spaun',group:4,odds:10000,is_amateur:false},
+  {name:'Cameron Smith',group:4,odds:10000,is_amateur:false},
+  {name:'Nicolai Hojgaard',group:4,odds:10000,is_amateur:false},
+  {name:'Maverick McNealy',group:4,odds:10000,is_amateur:false},
+  {name:'Gary Woodland',group:5,odds:10000,is_amateur:false},
+  {name:'Max Homa',group:5,odds:10000,is_amateur:false},
+  {name:'Daniel Berger',group:5,odds:12500,is_amateur:false},
+  {name:'Ben Griffin',group:5,odds:12500,is_amateur:false},
+  {name:'Rasmus Hojgaard',group:5,odds:15000,is_amateur:false},
+  {name:'Kurt Kitayama',group:5,odds:15000,is_amateur:false},
+  {name:'Aaron Rai',group:5,odds:15000,is_amateur:false},
+  {name:'Wyndham Clark',group:5,odds:15000,is_amateur:false},
+  {name:'Ryan Gerard',group:5,odds:15000,is_amateur:false},
+  {name:'Brian Harman',group:5,odds:15000,is_amateur:false},
+  {name:'Sam Stevens',group:6,odds:17500,is_amateur:false},
+  {name:'Max Greyserman',group:6,odds:17500,is_amateur:false},
+  {name:'Ryan Fox',group:6,odds:17500,is_amateur:false},
+  {name:'Casey Jarvis',group:6,odds:17500,is_amateur:true},
+  {name:'Keegan Bradley',group:6,odds:17500,is_amateur:false},
+  {name:'Haotong Li',group:6,odds:17500,is_amateur:false},
+  {name:'Dustin Johnson',group:6,odds:17500,is_amateur:false},
+  {name:'Alex Noren',group:6,odds:17500,is_amateur:false},
+  {name:'Harry Hall',group:6,odds:17500,is_amateur:false},
+  {name:'Nico Echavarria',group:6,odds:17500,is_amateur:false},
+  {name:'Sami Valimaki',group:6,odds:22500,is_amateur:false},
+  {name:'Nick Taylor',group:6,odds:22500,is_amateur:false},
+  {name:'Sergio Garcia',group:6,odds:22500,is_amateur:false},
+  {name:'Carlos Ortiz',group:6,odds:22500,is_amateur:false},
+  {name:'Kristoffer Reitan',group:6,odds:25000,is_amateur:false},
+  {name:'Matt McCarty',group:6,odds:25000,is_amateur:false},
+  {name:'Rasmus Neergaard-Petersen',group:6,odds:25000,is_amateur:false},
+  {name:'Andrew Novak',group:6,odds:25000,is_amateur:false},
+  {name:'Aldrich Potgieter',group:6,odds:25000,is_amateur:false},
+  {name:'Tom McKibbin',group:6,odds:25000,is_amateur:false},
+  {name:'Michael Brennan',group:6,odds:35000,is_amateur:false},
+  {name:'Michael Kim',group:6,odds:35000,is_amateur:false},
+  {name:'Davis Riley',group:6,odds:50000,is_amateur:false},
+  {name:'Bubba Watson',group:6,odds:50000,is_amateur:false},
+  {name:'Johnny Keefer',group:6,odds:50000,is_amateur:false},
+  {name:'Zach Johnson',group:6,odds:50000,is_amateur:false},
+  {name:'Charl Schwartzel',group:6,odds:75000,is_amateur:false},
+  {name:'Angel Cabrera',group:6,odds:100000,is_amateur:false},
+  {name:'Mason Howell',group:6,odds:100000,is_amateur:true},
+  {name:'Fifa Laopakdee',group:6,odds:100000,is_amateur:true},
+  {name:'Ethan Fang',group:6,odds:100000,is_amateur:true},
+  {name:'Brian Campbell',group:6,odds:100000,is_amateur:false},
+  {name:'Vijay Singh',group:6,odds:100000,is_amateur:false},
+  {name:'Jose Maria Olazabal',group:6,odds:100000,is_amateur:false},
+  {name:'Brandon Holtz',group:6,odds:100000,is_amateur:true},
+  {name:'Naoyuki Kataoka',group:6,odds:100000,is_amateur:false},
+  {name:'Danny Willett',group:6,odds:100000,is_amateur:false},
+  {name:'Jackson Herrington',group:6,odds:100000,is_amateur:true},
+  {name:'Fred Couples',group:6,odds:100000,is_amateur:false},
+  {name:'Mateo Pulcini',group:6,odds:100000,is_amateur:true},
+  {name:'Mike Weir',group:6,odds:100000,is_amateur:false}
+];
+
+
+
+const supabase = {
+  async query(table, options={}) {
+    let url = `${SUPABASE_URL}/rest/v1/${table}?`;
+    if (options.select) url += `select=${options.select}&`;
+    if (options.order) url += `order=${options.order}&`;
+    const res = await fetch(url, { headers: {'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Content-Type':'application/json'} });
+    return res.json();
+  },
+  async insert(table, data) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
+      method:'POST',
+      headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Content-Type':'application/json','Prefer':'return=minimal'},
+      body:JSON.stringify(data)
+    });
+    return res.ok;
+  },
+  async update(table, id, data) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?id=eq.${id}`, {
+      method:'PATCH',
+      headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Content-Type':'application/json','Prefer':'return=minimal'},
+      body:JSON.stringify(data)
+    });
+    return res.ok;
+  },
+  async upsert(table, data, onConflict) {
+    const url = `${SUPABASE_URL}/rest/v1/${table}`;
+    const res = await fetch(url, {
+      method:'POST',
+      headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Content-Type':'application/json','Prefer':`resolution=merge-duplicates,return=minimal`},
+      body:JSON.stringify(data)
+    });
+    return res.ok;
+  },
+  async delete(table, id) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?id=eq.${id}`, {
+      method:'DELETE',
+      headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Content-Type':'application/json'}
+    });
+    return res.ok;
+  }
+};
+
+function fmt(s) {
+  if (s===null||s===undefined) return 'N/A';
+  if (s===0) return 'E';
+  return s>0?`+${s}`:`${s}`;
+}
+function sc(s) {
+  if (s===null||s===undefined) return 'even';
+  return s<0?'under':s>0?'over':'even';
+}
+function countdown(ms) {
+  if (ms<=0) return null;
+  const d=Math.floor(ms/86400000), h=Math.floor((ms%86400000)/3600000), m=Math.floor((ms%3600000)/60000);
+  if (d>0) return `${d}d ${h}h ${m}m`;
+  if (h>0) return `${h}h ${m}m`;
+  return `${m}m`;
+}
+
+// Find player details by last name fallback
+
+function formatTeeTime(raw) {
+  if (!raw) return '—';
+  try {
+    const d = new Date(raw);
+    if (isNaN(d.getTime())) return raw;
+    return d.toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit', hour12:true, timeZone:'America/New_York'});
+  } catch(e) { return raw; }
+}
+
+function findDetailsByLastName(details, name) {
+  const last = name.split(' ').slice(-1)[0].toLowerCase();
+  const matches = Object.keys(details).filter(k => k.split(' ').slice(-1)[0].toLowerCase() === last);
+  // Only use last name fallback if exactly one player has that last name
+  if (matches.length === 1) return details[matches[0]];
+  return null;
+}
+
+
+// Known ESPN name variations -> our field names
+const ESPN_NAME_MAP = {
+  'Ludvig Åberg': 'Ludvig Aberg',
+  'Nicolai Højgaard': 'Nicolai Hojgaard',
+  'Rasmus Højgaard': 'Rasmus Hojgaard',
+  'Nico Echavarría': 'Nico Echavarria',
+  'Sergio García': 'Sergio Garcia',
+  'Sérgío García': 'Sergio Garcia',
+  'José María Olazábal': 'Jose Maria Olazabal',
+  'Ángel Cabrera': 'Angel Cabrera',
+  'Thorbjørn Olesen': 'Thorbjorn Olesen',
+  'Sami Välimäki': 'Sami Valimaki',
+  'Rasmus Neergaard-Petersen': 'Rasmus Neergaard-Petersen',
+};
+
+// Normalize ESPN name to our field name
+function normalizeESPNName(name) {
+  return ESPN_NAME_MAP[name] || name;
+}
+
+// Display name — first initial + last name for players sharing a last name
+const SHARED_LAST_NAMES = ['Hojgaard', 'Johnson', 'Kim'];
+function displayName(fullName) {
+  if (!fullName) return '—';
+  const parts = fullName.split(' ');
+  const last = parts.slice(-1)[0];
+  if (SHARED_LAST_NAMES.includes(last)) {
+    return `${parts[0][0]}. ${last}`;
+  }
+  return last;
+}
+
+// Fuzzy name lookup — handles ESPN name variations like accents, spacing
+function findScore(scores, name) {
+  if (scores[name] !== undefined) return scores[name];
+  // Only use last name fallback if exactly one player has that last name
+  const last = name.split(' ').slice(-1)[0].toLowerCase();
+  const matches = Object.keys(scores).filter(k => k.split(' ').slice(-1)[0].toLowerCase() === last);
+  if (matches.length === 1) return scores[matches[0]];
+  return null;
+}
+
+async function fetchESPN() {
+  try {
+    const res = await fetch('https://site.api.espn.com/apis/site/v2/sports/golf/leaderboard?event=401811941');
+    const data = await res.json();
+    const competitors = data?.events?.[0]?.competitions?.[0]?.competitors||[];
+    const tourneyStatus = data?.events?.[0]?.status?.type?.name || 'scheduled';
+    const scores = {};
+    const playerDetails = {};
+    const espnField = []; // full field from ESPN
+
+    competitors.forEach(c=>{
+      const rawName = c.athlete?.displayName;
+      if (!rawName) return;
+      const name = normalizeESPNName(rawName);
+
+      const statusName = c.status?.type?.name || 'scheduled';
+      const teeTime = c.status?.teeTime || c.teeTime || null;
+
+      // thru is in c.status.hole, fall back to statistics
+      const thruRaw = c.status?.hole ?? c.status?.thru ??
+        c.statistics?.find(s=>s.name==='thru'||s.name==='holesPlayed'||s.name==='holesCompleted')?.displayValue ?? null;
+      const thru = thruRaw !== null ? String(thruRaw).replace('*','').trim() : null;
+      const round = c.statistics?.find(s=>s.name==='round')?.displayValue ?? null;
+
+      // Parse toPar score
+      let toPar = c.statistics?.find(s=>s.name==='toPar')?.displayValue
+                ?? c.statistics?.find(s=>s.name==='scoreToPar')?.displayValue;
+      const scoreDisp = c.score?.displayValue;
+      let parsed = null;
+      for (const raw of [toPar, scoreDisp]) {
+        if (raw === undefined || raw === null) continue;
+        const s = String(raw).trim();
+        if (s === 'E' || s === 'EVEN') { parsed = 0; break; }
+        if (s === 'CUT' || s === 'WD' || s === 'DQ') { parsed = 'CUT'; break; }
+        const n = parseInt(s);
+        if (!isNaN(n) && n >= -30 && n <= 30) { parsed = n; break; }
+      }
+
+      playerDetails[name] = {
+        status: statusName,
+        teeTime,
+        thru: thru || null,
+        round,
+        score: parsed
+      };
+
+      if (parsed !== null) scores[name] = parsed;
+
+      // Build full field entry — sort order from ESPN (by position)
+      espnField.push({
+        name,
+        sortOrder: c.sortOrder ?? 999,
+        is_amateur: c.amateur ?? false
+      });
+    });
+
+    return { scores, playerDetails, espnField };
+  } catch(e) { return null; }
+}
+
+function computeStandings(entries, scores, field, cutLine, isCutMade, espnDetails) {
+  return entries.map(entry=>{
+    const picks=[entry.group1_pick,entry.group2_pick,entry.group3_pick,entry.group4_pick,entry.group5_pick,entry.group6_pick];
+    const pickScores=picks.map(name=>{
+      const info=field.find(p=>p.name===name);
+      let score=findScore(scores,name);
+      if (score==='WD'||(score===null&&info?.wd)) return {name,score:isCutMade?10:cutLine+5,status:'wd'};
+      if (score===null||score===undefined) score=0;
+      // Only cap score if player MADE the cut and is blowing up on weekend
+      // Players who missed the cut keep their actual score
+      const playerDetail = espnDetails?.[name]||findDetailsByLastName(espnDetails||{},name)||{};
+      const missedCut = playerDetail.status==='STATUS_CUT';
+      if (missedCut) return {name,score,status:'cut'};
+      if (isCutMade && score>cutLine) return {name,score:cutLine,status:'capped'};
+      return {name,score,status:'active'};
+    });
+    pickScores.sort((a,b)=>a.score-b.score);
+    const dropped=pickScores[pickScores.length-1];
+    const counted=pickScores.slice(0,5);
+    const total=counted.reduce((s,p)=>s+p.score,0);
+    return {...entry,pickScores,droppedPick:dropped,countedPicks:counted,totalScore:total};
+  }).sort((a,b)=>a.totalScore-b.totalScore);
+}
+
+
+function RulesCard() {
+  const [open,setOpen]=useState(false);
+  return (
+    <div className="rules-card">
+      <button className="rules-toggle" onClick={()=>setOpen(o=>!o)}>
+        <span>📋 How It Works — Pool Rules</span>
+        <span className={`rules-toggle-icon ${open?'open':''}`}>
+          {open?'Hide':'Show'} <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </span>
+      </button>
+      {open&&(
+        <div className="rules-body">
+          <div className="rules-grid">
+            <div className="rules-block">
+              <h4>The Picks</h4>
+              <p>Golfers are split into 6 groups by betting odds — Group 1 is the favorites, Group 6 is the longshots. Pick <strong>1 player from each group</strong> for a total of 6 picks.</p>
+            </div>
+            <div className="rules-block">
+              <h4>Scoring</h4>
+              <p>Your <strong>top 5 of 6 picks count</strong> — the worst performer is automatically dropped. Lowest cumulative score to par wins. Simple.</p>
+            </div>
+            <div className="rules-block">
+              <h4>The Cut Rule</h4>
+              <p>Players who <strong>miss the cut</strong> keep their score at time of cut. Players who <strong>make the cut but blow up on the weekend</strong> are capped at the cut line score — so you won't get crushed for a player who collapses Sunday.</p>
+            </div>
+            <div className="rules-block">
+              <h4>Tiebreakers</h4>
+              <ul>
+                <li><strong>TB1 — Low Amateur:</strong> Who finishes as the lowest scoring amateur?</li>
+                <li><strong>TB2 — Sunday Birdies:</strong> Total birdies made on Sunday by anyone T10 or better at tournament's end. Closest guess wins.</li>
+              </ul>
+            </div>
+          </div>
+          <div className="rules-highlight">
+            💡 <strong>Why the cut cap?</strong> In 2022 our runner-up nearly won with just 4 players playing the weekend because one player blew up on Sunday. The cap protects against that while still rewarding bold picks that go deep.
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+const {useState,useEffect,useCallback,useRef}=React;
+
+function App() {
+  const [view,setView]=useState('standings');
+  const [adminLoggedIn,setAdminLoggedIn]=useState(false);
+  const [entries,setEntries]=useState([]);
+  const [field,setField]=useState(MOCK_FIELD);
+  const [scores,setScores]=useState({});
+  const useMock=false;
+  const [lastUpdated,setLastUpdated]=useState(null);
+  const [nextUpdate,setNextUpdate]=useState(null);
+  const [updating,setUpdating]=useState(false);
+  const [cutLine,setCutLine]=useState(()=>{try{const v=localStorage.getItem('pickem_cutline');return v!==null?parseInt(v):CUT_LINE_DEFAULT;}catch{return CUT_LINE_DEFAULT;}});
+  const [isCutMade,setIsCutMade]=useState(()=>{try{return localStorage.getItem('pickem_cutmade')==='true';}catch{return false;}});
+  const [birdieCount,setBirdieCount]=useState('');
+  const [picksRevealed,setPicksRevealed]=useState(()=>{try{return localStorage.getItem('pickem_picks_revealed')==='true';}catch{return false;}});
+  const [payouts,setPayouts]=useState(()=>{try{const s=localStorage.getItem('pickem_payouts');return s?JSON.parse(s):{1:'',2:'',3:'',4:'',5:''};}catch{return {1:'',2:'',3:'',4:'',5:''}}});
+  const [espnDetails,setEspnDetails]=useState({});
+  const [espnField,setEspnField]=useState([]);
+  const [tourneyStarted,setTourneyStarted]=useState(false);
+  const [now,setNow]=useState(new Date());
+  const timerRef=useRef(null);
+
+  const entriesClosed=now>=ENTRY_CUTOFF;
+  const timeLeft=ENTRY_CUTOFF-now;
+
+  useEffect(()=>{ const t=setInterval(()=>setNow(new Date()),30000); return ()=>clearInterval(t); },[]);
+
+  const loadEntries=useCallback(async()=>{
+    try { const d=await supabase.query('entries',{select:'*',order:'created_at.asc'}); if(Array.isArray(d)) setEntries(d); } catch(e){}
+  },[]);
+  const loadSettings=useCallback(async()=>{
+    try {
+      const d = await supabase.query('pool_settings', {select:'*'});
+      if (Array.isArray(d) && d.length>0) {
+        const s = d[0];
+        if (s.cut_line !== null && s.cut_line !== undefined) { setCutLine(s.cut_line); try{localStorage.setItem('pickem_cutline',s.cut_line);}catch{} }
+        if (s.is_cut_made !== null && s.is_cut_made !== undefined) { setIsCutMade(s.is_cut_made); try{localStorage.setItem('pickem_cutmade',s.is_cut_made);}catch{} }
+        if (s.picks_revealed !== null && s.picks_revealed !== undefined) { setPicksRevealed(s.picks_revealed); try{localStorage.setItem('pickem_picks_revealed',s.picks_revealed);}catch{} }
+      }
+    } catch(e) {}
+  },[]);
+
+  const saveSettings=async(key,value)=>{
+    try {
+      await supabase.update('pool_settings', 1, {[key]:value});
+    } catch(e) {}
+  };
+
+  const loadField=useCallback(async()=>{
+    try { const d=await supabase.query('player_groups',{select:'*',order:'group_number.asc,owgr.asc'}); if(Array.isArray(d)&&d.length>0) setField(d); } catch(e){}
+  },[]);
+  const refresh=useCallback(async()=>{
+    setUpdating(true);
+    const n=new Date(); setLastUpdated(n); setNextUpdate(new Date(n.getTime()+UPDATE_INTERVAL));
+    const result=await fetchESPN();
+    if (result) {
+      if (result.scores && Object.keys(result.scores).length>0) {
+        setScores(result.scores);
+        setTourneyStarted(true);
+      } else {
+        setScores({});
+        setTourneyStarted(false);
+      }
+      if (result.playerDetails) setEspnDetails(result.playerDetails);
+      if (result.espnField&&result.espnField.length>0) setEspnField(result.espnField);
+    }
+    setUpdating(false);
+  },[]);
+
+  useEffect(()=>{ loadSettings(); loadEntries(); loadField(); refresh(); timerRef.current=setInterval(refresh,UPDATE_INTERVAL); return ()=>clearInterval(timerRef.current); },[]);
+
+  const standings=computeStandings(entries,scores,field,cutLine,isCutMade,espnDetails);
+  const activeField=field.length>0?field:MOCK_FIELD;
+  const groupedField=[1,2,3,4,5,6].map(g=>({group:g,players:activeField.filter(p=>p.group_number===g||p.group===g)}));
+  const fmtTime=d=>d?d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}):'--';
+
+  return (
+    <div>
+      <div className="header">
+        <div className="header-inner">
+          <div className="header-title">
+            <div className="header-logo">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="18.5" y="7" width="2" height="24" fill="white" rx="1"/>
+                <path d="M20.5 7 L33 12.5 L20.5 19 Z" fill="#c0392b"/>
+                <ellipse cx="20" cy="32" rx="7" ry="2" fill="rgba(255,255,255,0.2)"/>
+                <circle cx="20" cy="31.5" r="1.5" fill="var(--gold)"/>
+              </svg>
+            </div>
+            <div className="header-divider"></div>
+            <div>
+              <h1>Masters Pick Em 2026</h1>
+              <div className="header-sub">Augusta National · April 9–13, 2026</div>
+            </div>
+          </div>
+          <div className="nav">
+            <button className={view==='standings'?'active':''} onClick={()=>setView('standings')}>Standings</button>
+            <button className={view==='leaderboard'?'active':''} onClick={()=>setView('leaderboard')}>Leaderboard</button>
+            {!entriesClosed&&<button className={`enter-picks ${view==='enter'?'active':''}`} onClick={()=>setView('enter')}>Enter Picks</button>}
+            <button className={view==='admin'?'active':''} onClick={()=>setView('admin')}>Admin</button>
+          </div>
+        </div>
+      </div>
+      <div className="mobile-nav">
+        <button className={`mobile-nav-btn ${view==='standings'?'active':''}`} onClick={()=>setView('standings')}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          Standings
+        </button>
+        <button className={`mobile-nav-btn ${view==='leaderboard'?'active':''}`} onClick={()=>setView('leaderboard')}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          Leaderboard
+        </button>
+        {!entriesClosed&&<button className={`mobile-nav-btn enter-btn ${view==='enter'?'active':''}`} onClick={()=>setView('enter')}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          Enter Picks
+        </button>}
+        <button className={`mobile-nav-btn ${view==='admin'?'active':''}`} onClick={()=>setView('admin')}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg>
+          Admin
+        </button>
+      </div>
+      <div className="main">
+        <div className="status-bar">
+          <div className={`status-dot${updating?' stale':''}`}></div>
+          <span>{updating?'Updating...':'Live'}</span>
+          <span className="sep">|</span>
+          <span>Updated {fmtTime(lastUpdated)}</span>
+          <span className="sep">|</span>
+          <span>Next {fmtTime(nextUpdate)}</span>
+          <span className="sep">|</span>
+          <span>{entries.length} {entries.length===1?'entry':'entries'}</span>
+          {!entriesClosed&&timeLeft>0&&<><span className="sep">|</span><span style={{color:'var(--gold-light)',fontWeight:'500'}}>Closes in {countdown(timeLeft)}</span></>}
+          {entriesClosed&&<><span className="sep">|</span><span style={{color:'#fca5a5'}}>Entries closed</span></>}
+          {isCutMade&&<><span className="sep">|</span><span>Cut {fmt(cutLine)}</span></>}
+          <button onClick={refresh} style={{marginLeft:'auto',background:'rgba(255,255,255,0.15)',border:'none',color:'white',padding:'4px 12px',borderRadius:'12px',cursor:'pointer',fontSize:'11px'}}>Refresh</button>
+        </div>
+        <RulesCard/>
+        {view==='standings'&&<StandingsView standings={standings} entries={entries} picksRevealed={picksRevealed} entriesClosed={entriesClosed} payouts={payouts} tourneyStarted={tourneyStarted} scores={scores}/>}
+        {view==='leaderboard'&&<LeaderboardView scores={scores} field={field} espnDetails={espnDetails} tourneyStarted={tourneyStarted} espnField={espnField}/>}
+        {view==='enter'&&<EntryForm groupedField={groupedField} onSubmit={loadEntries} entriesClosed={entriesClosed} timeLeft={timeLeft}/>}
+        {view==='admin'&&<AdminView loggedIn={adminLoggedIn} onLogin={()=>setAdminLoggedIn(true)} entries={entries} standings={standings} scores={scores} field={field} cutLine={cutLine} setCutLine={setCutLine} isCutMade={isCutMade} setIsCutMade={setIsCutMade} birdieCount={birdieCount} setBirdieCount={setBirdieCount} picksRevealed={picksRevealed} setPicksRevealed={setPicksRevealed} payouts={payouts} setPayouts={setPayouts} onRefresh={refresh} onEntriesChange={loadEntries} groupedField={groupedField} espnDetails={espnDetails} espnField={espnField}/>}
+      </div>
+    </div>
+  );
+}
+
+function StandingsView({standings,entries,picksRevealed,entriesClosed,payouts,tourneyStarted,scores}) {
+  const [starred,setStarred]=useState(()=>{try{return JSON.parse(localStorage.getItem('pickem_starred')||'[]');}catch{return [];}});
+  const [search,setSearch]=useState('');
+
+  const toggleStar=(id)=>{
+    setStarred(prev=>{
+      const next=prev.includes(id)?prev.filter(x=>x!==id):[...prev,id];
+      try{localStorage.setItem('pickem_starred',JSON.stringify(next));}catch{}
+      return next;
+    });
+  };
+
+  if (entries.length===0) return (
+    <div className="card"><div className="card-body" style={{textAlign:'center',padding:'48px'}}>
+      <div style={{fontSize:'40px',marginBottom:'16px'}}>⛳</div>
+      <h2 style={{color:'var(--green)',marginBottom:'8px'}}>No entries yet</h2>
+      <p style={{color:'var(--text-muted)',fontSize:'14px'}}>Be the first to enter the pool!</p>
+    </div></div>
+  );
+
+  const hasLiveScores=Object.keys(scores||{}).length>0;
+  const picksLocked=!picksRevealed&&!hasLiveScores;
+  if (picksLocked) return (
+    <div className="card">
+      <div className="card-header">
+        <h2>Pool Entries</h2>
+        <div style={{fontSize:'12px',color:'var(--text-muted)'}}>{entries.length} entries submitted</div>
+      </div>
+      {payouts&&Object.values(payouts).some(v=>v)&&(
+        <div className="payout-banner">
+          <span style={{fontSize:'12px',fontWeight:'500',color:'var(--text-muted)',marginRight:'4px',fontFamily:"'Inter',sans-serif"}}>💰 Payouts:</span>
+          {[1,2,3,4,5].map(p=>payouts[p]?(
+            <div key={p} className="payout-pill">
+              <span className="payout-place">{p===1?'1st':p===2?'2nd':p===3?'3rd':`${p}th`}</span>
+              <span className="payout-amount">${payouts[p]}</span>
+            </div>
+          ):null)}
+        </div>
+      )}
+      <div style={{padding:'16px 24px'}}>
+        <div className="alert alert-warning">
+          <strong>🔒 Picks are sealed.</strong> {tourneyStarted ? 'Picks will be revealed once entries close April 9th at 5:00 AM ET.' : 'Scores and picks will be revealed once entries close Wednesday April 9th at 5:00 AM ET. Good luck!'}
+        </div>
+        <div className="locked-entries-grid">
+          {entries.map(e=><div key={e.id} className="locked-entry-chip">{e.participant_name}</div>)}
+        </div>
+      </div>
+    </div>
+  );
+
+  const inMoney=Math.min(3,standings.length);
+  const cutoffScore=standings.slice(0,inMoney).map(s=>s.totalScore).slice(-1)[0];
+  const tiedAtCutoff=standings.filter(s=>s.totalScore===cutoffScore).length>1;
+  const filtered=search.trim()?standings.filter(e=>e.participant_name.toLowerCase().includes(search.toLowerCase())):standings;
+  const starredEntries=standings.filter(e=>starred.includes(e.id));
+  const showStarred=starredEntries.length>0&&!search.trim();
+
+  const renderRow=(entry)=>{
+    const i=standings.indexOf(entry);
+    const isIM=i<inMoney;
+    const isTied=isIM&&tiedAtCutoff&&entry.totalScore===cutoffScore;
+    const isStarred=starred.includes(entry.id);
+    return (
+      <tr key={entry.id} className={isTied?'in-money-tied':isIM?'in-money':''}>
+        <td style={{width:'32px',paddingRight:'4px'}}>
+          <button className={`star-btn ${isStarred?'starred':''}`} onClick={()=>toggleStar(entry.id)} title={isStarred?'Unstar':'Star'}>
+            {isStarred?'★':'☆'}
+          </button>
+        </td>
+        <td><div className="rank-badge" style={i===0?{background:'var(--gold)',color:'white'}:i===1?{background:'#c0c0c0',color:'white'}:i===2?{background:'#cd7f32',color:'white'}:{}}>{isTied?`T${i+1}`:i+1}</div></td>
+        <td>
+          <div style={{fontWeight:'500',fontSize:'14px'}}>{entry.participant_name}</div>
+          {isIM&&<div style={{fontSize:'10px',color:'var(--gold)',marginTop:'2px'}}>● In the money</div>}
+          {isTied&&<div style={{fontSize:'10px',color:'var(--text-muted)',marginTop:'2px'}}>Tied — tiebreakers apply</div>}
+        </td>
+        <td style={{textAlign:'center'}}><span className={`score-val ${sc(entry.totalScore)}`} style={{fontSize:'16px',fontWeight:'600'}}>{fmt(entry.totalScore)}</span></td>
+        <td><div className="picks-row">{entry.pickScores.map((p,pi)=>{
+          const isD=p.name===entry.droppedPick?.name;
+          return <span key={pi} className={`pick-chip ${isD?'worst':p.status==='wd'?'wd':(p.status==='cut'||p.status==='capped')?'cut':''}`}>{displayName(p.name)} {fmt(p.score)}{p.status==='cut'&&<span style={{fontSize:'9px',marginLeft:'3px',opacity:0.7}}>CUT</span>}{p.status==='capped'&&<span style={{fontSize:'9px',marginLeft:'3px',opacity:0.7}}>CAP</span>}{p.status==='wd'&&<span style={{fontSize:'9px',marginLeft:'3px',opacity:0.7}}>WD</span>}</span>;
+        })}</div></td>
+        <td style={{fontSize:'11px',color:'var(--text-muted)'}}>
+          <div>Amat: {displayName(entry.tiebreaker_amateur)||'—'}</div>
+          <div>Birds: {entry.tiebreaker_birdies??'—'}</div>
+        </td>
+      </tr>
+    );
+  };
+
+  return (
+    <div className="card">
+      <div className="card-header">
+        <h2>Pool Standings</h2>
+        <div style={{display:'flex',gap:'16px',fontSize:'12px',color:'var(--text-muted)',flexWrap:'wrap',alignItems:'center'}}>
+          <span style={{fontWeight:'600',color:'var(--green)'}}>{entries.length} {entries.length===1?'entry':'entries'}</span>
+          <span>🏆 Top 3 in the money</span>
+          <span style={{display:'flex',alignItems:'center',gap:'4px'}}><span style={{width:'10px',height:'10px',background:'rgba(192,57,43,0.2)',display:'inline-block',borderRadius:'2px'}}></span>Dropped</span>
+        </div>
+      </div>
+      {payouts&&Object.values(payouts).some(v=>v)&&(
+        <div className="payout-banner">
+          <span style={{fontSize:'12px',fontWeight:'500',color:'var(--text-muted)',marginRight:'4px',fontFamily:"'Inter',sans-serif"}}>💰 Payouts:</span>
+          {[1,2,3,4,5].map(p=>payouts[p]?(
+            <div key={p} className="payout-pill">
+              <span className="payout-place">{p===1?'1st':p===2?'2nd':p===3?'3rd':`${p}th`}</span>
+              <span className="payout-amount">${payouts[p]}</span>
+            </div>
+          ):null)}
+        </div>
+      )}
+      <div className="standings-toolbar">
+        <div className="standings-search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-light)" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search by name..." />
+          {search&&<button className="search-clear" onClick={()=>setSearch('')}>×</button>}
+        </div>
+        {starred.length>0&&!search&&<div style={{fontSize:'12px',color:'var(--text-muted)'}}>★ {starred.length} starred</div>}
+      </div>
+      {showStarred&&(
+        <div className="starred-section">
+          <div className="starred-label">★ Your entries</div>
+          <div style={{overflowX:'auto'}}>
+            <table className="standings-table">
+              <tbody>{starredEntries.map(e=>renderRow(e))}</tbody>
+            </table>
+          </div>
+        </div>
+      )}
+      <div style={{overflowX:'auto'}}>
+        <table className="standings-table">
+          <thead><tr>
+            <th style={{width:'32px'}}></th>
+            <th style={{width:'48px'}}>Pos</th>
+            <th>Participant</th>
+            <th style={{width:'70px',textAlign:'center'}}>Total</th>
+            <th>Picks · worst dropped</th>
+            <th style={{width:'90px'}}>Tiebreakers</th>
+          </tr></thead>
+          <tbody>
+            {filtered.length===0
+              ? <tr><td colSpan="6" style={{textAlign:'center',padding:'32px',color:'var(--text-muted)',fontSize:'13px'}}>No entries match "{search}"</td></tr>
+              : filtered.map(e=>renderRow(e))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+
+function LeaderboardView({scores,field,espnDetails,tourneyStarted,espnField}) {
+  const [active,setActive]=useState('all');
+  let withScores;
+  const playerList=field.length>0?field:MOCK_FIELD;
+
+  const hasLiveScores=Object.keys(scores).length>0;
+
+  // Build group lookup from defined field
+  const fieldLookup = {};
+  playerList.forEach(p=>{
+    const n=p.name||p.player_name;
+    fieldLookup[n]={group:p.group_number||p.group,owgr:p.owgr,is_amateur:p.is_amateur};
+  });
+
+  // Show all players — score from ESPN if available (E=0 before start), tee time from ESPN
+  const fullField = espnField.length>0 ? espnField : playerList;
+  withScores = playerList.map(p=>{
+    const name = p.name||p.player_name;
+    const group = p.group||p.group_number||null;
+    const details = espnDetails[name]||findDetailsByLastName(espnDetails,name)||{};
+    const score = hasLiveScores ? (findScore(scores,name)??0) : null;
+    const teeTime = details.teeTime || null;
+    const status = details.status||'scheduled';
+    const isCut = status==='STATUS_CUT';
+    const isWD = status==='STATUS_ELIMINATED' || status==='STATUS_DISQUALIFIED';
+    return {name, score, group, owgr:p.owgr||null, is_amateur:p.is_amateur||false,
+      teeTime, thru:details.thru||null, status, isCut, isWD};
+  });
+  if (hasLiveScores) {
+    withScores.sort((a,b)=>{
+      // Players with scores on course come first, sorted by score then thru
+      const aStarted = a.thru !== null;
+      const bStarted = b.thru !== null;
+      if (aStarted && !bStarted) return -1;
+      if (!aStarted && bStarted) return 1;
+      if (a.score !== b.score) return a.score - b.score;
+      // Same score — further along course ranks higher
+      const aThru = a.thru==='F'?18:parseInt(a.thru)||0;
+      const bThru = b.thru==='F'?18:parseInt(b.thru)||0;
+      return bThru - aThru;
+    });
+  } else {
+    withScores.sort((a,b)=>{
+      if (!a.teeTime&&!b.teeTime) return (a.group||99)-(b.group||99);
+      if (!a.teeTime) return 1;
+      if (!b.teeTime) return -1;
+      return a.teeTime.localeCompare(b.teeTime);
+    });
+  }
+  const filtered=active==='all'?withScores:withScores.filter(p=>p.group===parseInt(active));
+  let pos=1;
+  const withPos=[];
+  filtered.forEach((p,i)=>{
+    if (i>0&&filtered[i-1].score===p.score) {
+      withPos.push({...p,pos:withPos[i-1].pos,tied:true});
+    } else {
+      withPos.push({...p,pos,tied:false});
+      pos=i+2;
+    }
+  });
+  return (
+    <div className="card">
+      <div className="card-header"><h2>Tournament Leaderboard</h2><div style={{fontSize:'12px',color:'var(--text-muted)'}}>{withScores.length} players</div></div>
+      <div style={{padding:'16px 24px 0'}}><div className="tabs">
+        {['all',1,2,3,4,5,6].map(g=><button key={g} className={`tab ${active==g?'active':''}`} onClick={()=>setActive(String(g))}>{g==='all'?'All Players':`Group ${g}`}</button>)}
+      </div></div>
+      <div style={{overflowX:'auto'}}>
+        <table className="leaderboard-table">
+          <thead><tr><th style={{width:'50px'}}>Pos</th><th>Player</th><th style={{width:'70px',textAlign:'center'}}>Score</th><th style={{width:'70px',textAlign:'center'}}>Thru</th><th style={{width:'90px',textAlign:'center'}}>Tee Time</th><th style={{width:'60px',textAlign:'center'}}>Group</th></tr></thead>
+          <tbody>{withPos.length===0?(
+            <tr><td colSpan="6" style={{textAlign:'center',padding:'40px',color:'var(--text-muted)',fontSize:'13px'}}>
+              Scores will appear here once the tournament begins Thursday April 10th.
+            </td></tr>
+          ):withPos.map((p,i)=>(
+            <tr key={i}>
+              <td><span style={{fontWeight:'500',fontSize:'12px'}}>{p.score===null?'':p.tied?`T${p.pos}`:p.pos}</span></td>
+              <td><span style={{fontWeight:'500'}}>{p.name}</span>{p.is_amateur&&<span className="amateur-badge" style={{marginLeft:'6px'}}>Am</span>}{p.isCut&&<span style={{fontSize:'9px',marginLeft:'6px',background:'rgba(100,100,100,0.12)',color:'var(--text-muted)',padding:'1px 5px',borderRadius:'4px'}}>CUT</span>}{p.isWD&&<span style={{fontSize:'9px',marginLeft:'6px',background:'rgba(100,100,100,0.12)',color:'var(--text-muted)',padding:'1px 5px',borderRadius:'4px'}}>WD</span>}</td>
+              <td style={{textAlign:'center'}}>{p.score===null?<span style={{color:'var(--text-muted)'}}>—</span>:<span className={`score-val ${sc(p.score)}`} style={{fontWeight:'600'}}>{fmt(p.score)}</span>}</td>
+              <td style={{textAlign:'center',fontSize:'12px',color:'var(--text-muted)'}}>{p.thru?(p.thru==='F'||p.thru==='18'?'F':p.thru):'—'}</td>
+              <td style={{textAlign:'center',fontSize:'12px',color:'var(--text-muted)'}}>{formatTeeTime(p.teeTime)||'—'}</td>
+              <td style={{textAlign:'center',fontSize:'12px',color:'var(--text-muted)'}}>{p.group?`G${p.group}`:'—'}</td>
+            </tr>
+          ))}</tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+
+function EntryForm({groupedField,onSubmit,entriesClosed,timeLeft}) {
+  const [step,setStep]=useState(1);
+  const [submitted,setSubmitted]=useState(false);
+  const [submitting,setSubmitting]=useState(false);
+  const [form,setForm]=useState({participant_name:'',email:'',group1_pick:'',group2_pick:'',group3_pick:'',group4_pick:'',group5_pick:'',group6_pick:'',tiebreaker_amateur:'',tiebreaker_birdies:'',venmo_paid:''});
+  const [errors,setErrors]=useState({});
+  const set=(k,v)=>setForm(f=>({...f,[k]:v}));
+
+  if (entriesClosed) return (
+    <div className="card"><div className="card-body" style={{textAlign:'center',padding:'48px'}}>
+      <div style={{fontSize:'40px',marginBottom:'16px'}}>🔒</div>
+      <h2 style={{color:'var(--red)',marginBottom:'8px'}}>Entries are closed</h2>
+      <p style={{color:'var(--text-muted)',fontSize:'14px'}}>The deadline was April 8th at 8:00 PM ET. Check the standings!</p>
+    </div></div>
+  );
+  if (submitted) return (
+    <div className="card"><div className="success-screen">
+      <div className="success-icon">✓</div>
+      <h2>You're in!</h2>
+      <p style={{marginBottom:'24px'}}>Entry submitted for <strong>{form.participant_name}</strong>. Good luck at Augusta!</p>
+      <button className="btn btn-outline" onClick={()=>{setSubmitted(false);setStep(1);setForm({participant_name:'',email:'',group1_pick:'',group2_pick:'',group3_pick:'',group4_pick:'',group5_pick:'',group6_pick:'',tiebreaker_amateur:'',tiebreaker_birdies:'',venmo_paid:''});}}>Submit Another</button>
+    </div></div>
+  );
+
+  const v1=()=>{ const e={}; if(!form.participant_name.trim())e.participant_name='Name required'; if(!form.email.trim())e.email='Email is required'; else if(!/\S+@\S+\.\S+/.test(form.email))e.email='Invalid email'; setErrors(e); return !Object.keys(e).length; };
+  const v2=()=>{ const e={}; for(let i=1;i<=6;i++) if(!form[`group${i}_pick`])e[`group${i}_pick`]='Select a player'; setErrors(e); return !Object.keys(e).length; };
+  const v3=()=>{ const e={}; if(!form.tiebreaker_amateur)e.tiebreaker_amateur='Select an amateur'; if(!form.tiebreaker_birdies||isNaN(parseInt(form.tiebreaker_birdies)))e.tiebreaker_birdies='Enter a number'; if(form.venmo_paid!=='yes')e.venmo_paid='You must confirm payment before submitting'; setErrors(e); return !Object.keys(e).length; };
+  const next=()=>{ if(step===1&&v1())setStep(2); if(step===2&&v2())setStep(3); };
+  const submit=async()=>{ if(!v3())return; setSubmitting(true); const ok=await supabase.insert('entries',{...form,tiebreaker_birdies:parseInt(form.tiebreaker_birdies)}); if(ok){setSubmitted(true);onSubmit();}else{setErrors({submit:'Submission failed. Try again.'});} setSubmitting(false); };
+
+  return (
+    <div className="card">
+      <div className="card-header"><h2>Submit Your Entry</h2><div style={{fontSize:'13px',color:'var(--text-muted)'}}>Step {step} of 3</div></div>
+      <div className="card-body">
+        {timeLeft>0&&timeLeft<86400000*2&&<div className="countdown-pill">⏰ Entries close in {countdown(timeLeft)} — April 8th 8:00 PM ET</div>}
+        <div className="entry-form">
+          <div style={{display:'flex',marginBottom:'28px'}}>
+            {[1,2,3].map(s=>(
+              <div key={s} style={{flex:1,display:'flex',alignItems:'center'}}>
+                <div style={{width:'28px',height:'28px',borderRadius:'50%',background:s<=step?'var(--green)':'var(--cream-dark)',color:s<=step?'white':'var(--text-muted)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'12px',fontWeight:'500',flexShrink:0}}>{s}</div>
+                {s<3&&<div style={{flex:1,height:'2px',background:s<step?'var(--green)':'var(--cream-dark)'}}></div>}
+              </div>
+            ))}
+          </div>
+          {step===1&&(
+            <div>
+              <div className="form-section-title">Your Details</div>
+              
+              <div className="form-row">
+                <div className="form-field">
+                  <label>Your Name *</label>
+                  <input value={form.participant_name} onChange={e=>set('participant_name',e.target.value)} placeholder="Full name" className={errors.participant_name?'error':''} />
+                  {errors.participant_name&&<span className="error-msg">{errors.participant_name}</span>}
+                </div>
+                <div className="form-field">
+                  <label>Email *</label>
+                  <input value={form.email} onChange={e=>set('email',e.target.value)} placeholder="email@example.com" className={errors.email?'error':''} />
+                  {errors.email&&<span className="error-msg">{errors.email}</span>}
+                </div>
+              </div>
+              <button className="btn btn-primary" onClick={next}>Continue to Picks →</button>
+            </div>
+          )}
+          {step===2&&(
+            <div>
+              <div className="form-section-title">Make Your Picks</div>
+              <div className="form-section-sub">Select one player from each group. Players ranked by OWGR.</div>
+              <div className="alert alert-info" style={{marginBottom:'16px'}}><strong>Scoring:</strong> Best 5 of 6 picks count — worst is dropped automatically. After the cut, missed-cut players are capped at the cut line score.</div>
+              <div className="group-grid">
+                {groupedField.map(({group,players})=>(
+                  <div key={group} className="group-card">
+                    <div className="group-card-header">
+                      <span>Group {group}{group===6?' (Field)':''}</span>
+                      {group===1&&<span className="owgr-range">+460 – +2700</span>}{group===2&&<span className="owgr-range">+2700 – +4000</span>}{group===3&&<span className="owgr-range">+4500 – +6000</span>}{group===4&&<span className="owgr-range">+6000 – +8000</span>}{group===5&&<span className="owgr-range">+8000 – +15000</span>}{group===6&&<span className="owgr-range">+15000 & longer</span>}
+                    </div>
+                    {players.map(p=>{
+                      const name=p.name||p.player_name;
+                      const key=`group${group}_pick`;
+                      return (
+                        <label key={name} className={`group-player ${form[key]===name?'selected':''}`}>
+                          <input type="radio" name={`group${group}`} value={name} checked={form[key]===name} onChange={()=>set(key,name)} />
+                          <span className="group-player-name">{name}</span>
+                          {p.is_amateur&&<span className="amateur-badge">Am</span>}
+                          {p.owgr&&<span className="group-player-owgr">#{p.owgr}</span>}
+                        </label>
+                      );
+                    })}
+                    {errors[`group${group}_pick`]&&<div style={{padding:'6px 16px',color:'var(--red)',fontSize:'11px'}}>{errors[`group${group}_pick`]}</div>}
+                  </div>
+                ))}
+              </div>
+              <div style={{display:'flex',gap:'12px'}}>
+                <button className="btn btn-outline" onClick={()=>setStep(1)}>← Back</button>
+                <button className="btn btn-primary" onClick={next}>Continue to Tiebreakers →</button>
+              </div>
+            </div>
+          )}
+          {step===3&&(
+            <div>
+              <div className="form-section-title">Tiebreakers</div>
+              <div className="form-section-sub">Used to break ties if multiple entries finish with the same score.</div>
+              <div className="form-row" style={{marginBottom:'24px'}}>
+                <div className="form-field">
+                  <label>Tiebreaker 1 — Low Amateur</label>
+                  {(groupedField.find(g=>g.group===6)?.players||[]).filter(p=>p.is_amateur).length > 0 ? (
+                    <select value={form.tiebreaker_amateur} onChange={e=>set('tiebreaker_amateur',e.target.value)} className={errors.tiebreaker_amateur?'error':''}>
+                      <option value="">Select an amateur...</option>
+                      {(groupedField.find(g=>g.group===6)?.players||[]).filter(p=>p.is_amateur).map(p=>{const n=p.name||p.player_name;return <option key={n} value={n}>{n}</option>;})}
+                    </select>
+                  ) : (
+                    <input value={form.tiebreaker_amateur} onChange={e=>set('tiebreaker_amateur',e.target.value)} placeholder="Enter player name" className={errors.tiebreaker_amateur?'error':''} />
+                  )}
+                  {errors.tiebreaker_amateur&&<span className="error-msg">{errors.tiebreaker_amateur}</span>}
+                  <small style={{fontSize:'11px',color:'var(--text-muted)',marginTop:'2px'}}>Who will score lowest among the amateurs?</small>
+                </div>
+                <div className="form-field">
+                  <label>Tiebreaker 2 — Final Round Birdies</label>
+                  <input type="number" min="0" max="500" value={form.tiebreaker_birdies} onChange={e=>set('tiebreaker_birdies',e.target.value)} placeholder="e.g. 178" className={errors.tiebreaker_birdies?'error':''} />
+                  {errors.tiebreaker_birdies&&<span className="error-msg">{errors.tiebreaker_birdies}</span>}
+                  <small style={{fontSize:'11px',color:'var(--text-muted)',marginTop:'2px'}}>Total birdies by T10 and above in the final round</small>
+                </div>
+              </div>
+              <div style={{background:'var(--cream-dark)',borderRadius:'10px',padding:'20px',marginBottom:'20px',border:'2px solid var(--gold)'}}>
+                <div style={{fontSize:'15px',fontWeight:'500',color:'var(--green)',marginBottom:'8px',fontFamily:"'Cormorant Garamond',serif"}}>💸 One last thing...</div>
+                <p style={{fontSize:'13px',color:'var(--text-muted)',marginBottom:'14px'}}>Entry fee is <strong>$50</strong> <span style={{fontSize:'11px',color:'var(--text-muted)'}}>($3 covers platform costs)</span>. Have you paid via Venmo to <a href='https://venmo.com/u/jacob-martin-9' target='_blank' style={{color:'var(--green)',fontWeight:'600'}}>@jacob-martin-9</a>? Unpaid entries will be disqualified.</p>
+                <div style={{display:'flex',gap:'10px',flexWrap:'wrap'}}>
+                  <label style={{display:'flex',alignItems:'center',gap:'8px',cursor:'pointer',padding:'10px 16px',borderRadius:'8px',border:`2px solid ${form.venmo_paid==='yes'?'var(--green)':'var(--border)'}`,background:form.venmo_paid==='yes'?'rgba(26,71,42,0.06)':'white',flex:1,minWidth:'120px'}}>
+                    <input type="radio" name="venmo" value="yes" checked={form.venmo_paid==='yes'} onChange={()=>set('venmo_paid','yes')} style={{accentColor:'var(--green)'}} />
+                    <span style={{fontSize:'14px',fontWeight:'500',color:'var(--green)'}}>✓ Yes, paid!</span>
+                  </label>
+                  <label style={{display:'flex',alignItems:'center',gap:'8px',cursor:'pointer',padding:'10px 16px',borderRadius:'8px',border:`2px solid ${form.venmo_paid==='no'?'var(--red)':'var(--border)'}`,background:form.venmo_paid==='no'?'rgba(192,57,43,0.04)':'white',flex:1,minWidth:'120px'}}>
+                    <input type="radio" name="venmo" value="no" checked={form.venmo_paid==='no'} onChange={()=>set('venmo_paid','no')} style={{accentColor:'var(--red)'}} />
+                    <span style={{fontSize:'14px',color:'var(--text-muted)'}}>Not yet</span>
+                  </label>
+                </div>
+                {form.venmo_paid==='no'&&<div style={{marginTop:'10px',fontSize:'12px',color:'var(--red)',padding:'8px 12px',background:'rgba(192,57,43,0.06)',borderRadius:'6px'}}>Please Venmo your entry fee before submitting — unpaid entries will be removed.</div>}
+                {errors.venmo_paid&&<div className="error-msg" style={{marginTop:'6px'}}>{errors.venmo_paid}</div>}
+              </div>
+              <div className="alert alert-warning" style={{marginBottom:'20px'}}><strong>Your picks:</strong> {[1,2,3,4,5,6].map(g=>form[`group${g}_pick`]||`G${g}: none`).join(' · ')}</div>
+              {errors.submit&&<div style={{color:'var(--red)',fontSize:'13px',marginBottom:'12px'}}>{errors.submit}</div>}
+              <div style={{display:'flex',gap:'12px'}}>
+                <button className="btn btn-outline" onClick={()=>setStep(2)}>← Back</button>
+                <button className="btn btn-gold" onClick={submit} disabled={submitting}>
+                  {submitting?<div style={{display:'flex',alignItems:'center',gap:'8px'}}><div className="spinner"></div>Submitting...</div>:'🏆 Submit Entry'}
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function EditModal({entry,groupedField,onSave,onClose}) {
+  const [form,setForm]=useState({group1_pick:entry.group1_pick,group2_pick:entry.group2_pick,group3_pick:entry.group3_pick,group4_pick:entry.group4_pick,group5_pick:entry.group5_pick,group6_pick:entry.group6_pick,tiebreaker_amateur:entry.tiebreaker_amateur,tiebreaker_birdies:entry.tiebreaker_birdies});
+  const [saving,setSaving]=useState(false);
+  const [saved,setSaved]=useState(false);
+  const set=(k,v)=>setForm(f=>({...f,[k]:v}));
+  const [saveErr,setSaveErr]=useState('');
+  const save=async()=>{
+    setSaving(true); setSaveErr('');
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/entries?id=eq.${entry.id}`, {
+        method:'PATCH',
+        headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Content-Type':'application/json','Prefer':'return=representation'},
+        body:JSON.stringify(form)
+      });
+      const text = await res.text();
+      if(res.ok){ setSaved(true); setTimeout(()=>{onSave();onClose();},700); }
+      else { setSaveErr(`Save failed (${res.status}): ${text}`); }
+    } catch(e) { setSaveErr(`Error: ${e.message}`); }
+    setSaving(false);
+  };
+  return (
+    <div className="modal-overlay" onClick={e=>{if(e.target.className==='modal-overlay')onClose();}}>
+      <div className="modal">
+        <h3>Edit Entry</h3>
+        <div className="modal-sub">Editing picks for <strong>{entry.participant_name}</strong></div>
+        <div className="edit-grid">
+          {[1,2,3,4,5,6].map(g=>(
+            <div key={g} className="edit-group">
+              <label>Group {g}{g<6?` (OWGR ${(g-1)*10+1}–${g*10})`:' (Field + Amateurs)'}</label>
+              <select value={form[`group${g}_pick`]} onChange={e=>set(`group${g}_pick`,e.target.value)}>
+                {(groupedField.find(gf=>gf.group===g)?.players||[]).map(p=>{const n=p.name||p.player_name;return <option key={n} value={n}>{n}{p.is_amateur?' (Am)':''}</option>;})}
+              </select>
+            </div>
+          ))}
+        </div>
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'12px',marginTop:'4px'}}>
+          <div className="edit-group">
+            <label>TB1 — Low Amateur</label>
+            <select value={form.tiebreaker_amateur} onChange={e=>set('tiebreaker_amateur',e.target.value)}>
+              {(groupedField.find(g=>g.group===6)?.players||[]).filter(p=>p.is_amateur).map(p=>{const n=p.name||p.player_name;return <option key={n} value={n}>{n}</option>;})}
+            </select>
+          </div>
+          <div className="edit-group">
+            <label>TB2 — Birdie Guess</label>
+            <input type="number" value={form.tiebreaker_birdies} onChange={e=>set('tiebreaker_birdies',parseInt(e.target.value))} />
+          </div>
+        </div>
+        <div style={{display:'flex',gap:'10px',marginTop:'20px',justifyContent:'flex-end'}}>
+          {saveErr&&<div style={{color:'var(--red)',fontSize:'12px',marginBottom:'8px',width:'100%'}}>{saveErr}</div>}
+          <button className="btn btn-outline btn-sm" onClick={onClose}>Cancel</button>
+          <button className="btn btn-primary btn-sm" onClick={save} disabled={saving||saved}>{saved?'✓ Saved!':saving?'Saving...':'Save Changes'}</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AdminView({loggedIn,onLogin,entries,standings,scores,field,cutLine,setCutLine,isCutMade,setIsCutMade,birdieCount,setBirdieCount,picksRevealed,setPicksRevealed,payouts,setPayouts,onRefresh,onEntriesChange,groupedField,espnDetails,espnField}) {
+  const [pw,setPw]=useState('');
+  const [pwErr,setPwErr]=useState('');
+  const [tab,setTab]=useState('controls');
+  const [cutInput,setCutInput]=useState(cutLine);
+  const [editing,setEditing]=useState(null);
+  const [confirmDelete,setConfirmDelete]=useState(null);
+
+  const handleDelete = async (entry) => {
+    const ok = await supabase.delete('entries', entry.id);
+    if (ok) { onEntriesChange(); setConfirmDelete(null); }
+  };
+
+  if (!loggedIn) return (
+    <div className="login-box">
+      <div style={{fontSize:'32px',marginBottom:'12px'}}>🔒</div>
+      <h2>Admin Access</h2>
+      <p>Enter your admin password to manage the pool.</p>
+      <div className="form-field" style={{marginBottom:'12px'}}>
+        <input type="password" value={pw} onChange={e=>setPw(e.target.value)} placeholder="Password" onKeyDown={e=>{if(e.key==='Enter'){if(pw===ADMIN_PASSWORD)onLogin();else setPwErr('Incorrect password');}}} />
+        {pwErr&&<span className="error-msg">{pwErr}</span>}
+      </div>
+      <button className="btn btn-primary" style={{width:'100%'}} onClick={()=>{if(pw===ADMIN_PASSWORD)onLogin();else setPwErr('Incorrect password');}}>Sign In</button>
+    </div>
+  );
+
+  return (
+    <div>
+      {editing&&<EditModal entry={editing} groupedField={groupedField} onSave={onEntriesChange} onClose={()=>setEditing(null)}/>}
+      {confirmDelete&&(
+        <div className="modal-overlay" onClick={e=>{if(e.target.className==='modal-overlay')setConfirmDelete(null);}}>
+          <div className="modal" style={{maxWidth:'420px',textAlign:'center'}}>
+            <div style={{fontSize:'32px',marginBottom:'12px'}}>🗑️</div>
+            <h3 style={{marginBottom:'6px'}}>Delete Entry?</h3>
+            <div className="modal-sub">This will permanently remove <strong>{confirmDelete.participant_name}</strong>'s entry. This cannot be undone.</div>
+            <div style={{display:'flex',gap:'10px',justifyContent:'center',marginTop:'20px'}}>
+              <button className="btn btn-outline btn-sm" onClick={()=>setConfirmDelete(null)}>Cancel</button>
+              <button className="btn btn-sm" style={{background:'var(--red)',color:'white',border:'none'}} onClick={()=>handleDelete(confirmDelete)}>Yes, Delete</button>
+            </div>
+          </div>
+
+        </div>
+      )}
+      <div className="tabs">
+        {['controls','entries','tiebreakers','qa'].map(t=><button key={t} className={`tab ${tab===t?'active':''}`} onClick={()=>setTab(t)}>{t==='qa'?'Field QA':t.charAt(0).toUpperCase()+t.slice(1)}</button>)}
+      </div>
+
+      {tab==='controls'&&(
+        <div className="card">
+          <div className="card-header"><h2>Pool Controls</h2></div>
+          <div className="card-body">
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',gap:'20px'}}>
+              <div style={{background:'var(--cream-dark)',borderRadius:'10px',padding:'20px'}}>
+                <h3 style={{fontSize:'15px',marginBottom:'12px',color:'var(--green)'}}>Data Source</h3>
+                <div style={{fontSize:'13px',color:'var(--text-muted)',marginBottom:'12px'}}>Always pulling live from ESPN. Updates every 5 minutes automatically.</div>
+                <button className="btn btn-outline" style={{width:'100%',fontSize:'13px'}} onClick={onRefresh}>Force Refresh Now</button>
+              </div>
+              <div style={{background:'var(--cream-dark)',borderRadius:'10px',padding:'20px'}}>
+                <h3 style={{fontSize:'15px',marginBottom:'10px',color:'var(--green)'}}>Picks Visibility</h3>
+                <p style={{fontSize:'12px',color:'var(--text-muted)',marginBottom:'12px'}}>After the April 8th 8 PM ET deadline, picks are hidden until you reveal them here.</p>
+                <label style={{display:'flex',alignItems:'center',gap:'10px',cursor:'pointer',marginBottom:'10px'}}>
+                  <input type="checkbox" checked={picksRevealed} onChange={e=>{setPicksRevealed(e.target.checked);try{localStorage.setItem('pickem_picks_revealed',e.target.checked);}catch{}saveSettings('picks_revealed',e.target.checked);}} style={{accentColor:'var(--green)',width:'15px',height:'15px'}} />
+                  <div><div style={{fontSize:'13px',fontWeight:'500'}}>Reveal all picks publicly</div><div style={{fontSize:'11px',color:'var(--text-muted)'}}>Flip on after entries close April 8th 8 PM ET</div></div>
+                </label>
+                <div style={{fontSize:'12px',padding:'8px 12px',borderRadius:'6px',background:picksRevealed?'rgba(26,71,42,0.08)':'rgba(192,57,43,0.08)',color:picksRevealed?'var(--green)':'var(--red)'}}>
+                  {picksRevealed?'✓ Picks visible to everyone':'🔒 Picks hidden from participants'}
+                </div>
+              </div>
+              <div style={{background:'var(--cream-dark)',borderRadius:'10px',padding:'20px'}}>
+                <h3 style={{fontSize:'15px',marginBottom:'12px',color:'var(--green)'}}>Cut Line</h3>
+                <label style={{display:'flex',alignItems:'center',gap:'10px',cursor:'pointer',marginBottom:'12px'}}>
+                  <input type="checkbox" checked={isCutMade} onChange={e=>{setIsCutMade(e.target.checked);try{localStorage.setItem('pickem_cutmade',e.target.checked);}catch{}saveSettings('is_cut_made',e.target.checked);}} style={{accentColor:'var(--green)',width:'15px',height:'15px'}} />
+                  <span style={{fontSize:'13px',fontWeight:'500'}}>Cut has been made (activate Friday)</span>
+                </label>
+                {isCutMade&&(
+                  <div className="form-field">
+                    <label>Cut Line Score</label>
+                    <div style={{display:'flex',gap:'8px',alignItems:'center'}}>
+                      <input type="number" value={cutInput} onChange={e=>setCutInput(e.target.value)} style={{width:'80px'}} />
+                      <button className="btn btn-outline btn-sm" onClick={()=>{const v=parseInt(cutInput);setCutLine(v);try{localStorage.setItem('pickem_cutline',v);}catch{}saveSettings('cut_line',v);}}>Apply</button>
+                    </div>
+                    <small style={{fontSize:'11px',color:'var(--text-muted)',marginTop:'3px'}}>Current: {fmt(cutLine)}</small>
+                  </div>
+                )}
+              </div>
+            </div>
+            <div style={{marginTop:'20px',background:'var(--cream-dark)',borderRadius:'10px',padding:'20px'}}>
+              <h3 style={{fontSize:'15px',marginBottom:'10px',color:'var(--green)'}}>Pool Summary</h3>
+              <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(110px,1fr))',gap:'12px'}}>
+                {[{l:'Entries',v:entries.length},{l:'Leader',v:standings[0]?.participant_name?.split(' ')[0]||'—'},{l:'Top Score',v:standings[0]?fmt(standings[0].totalScore):'—'},{l:'Picks Shown',v:picksRevealed?'Yes':'No'},{l:'Cut Made',v:isCutMade?'Yes':'No'}].map(s=>(
+                  <div key={s.l} style={{background:'white',borderRadius:'8px',padding:'12px',textAlign:'center'}}>
+                    <div style={{fontSize:'11px',color:'var(--text-muted)',marginBottom:'4px',textTransform:'uppercase',letterSpacing:'0.6px'}}>{s.l}</div>
+                    <div style={{fontSize:'18px',fontWeight:'500',color:'var(--green)'}}>{s.v}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div style={{marginTop:'20px',background:'var(--cream-dark)',borderRadius:'10px',padding:'20px'}}>
+            <h3 style={{fontSize:'15px',marginBottom:'4px',color:'var(--green)'}}>Payout Structure</h3>
+            <p style={{fontSize:'12px',color:'var(--text-muted)',marginBottom:'14px'}}>Enter dollar amounts — these show publicly on the standings page once filled in.</p>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'10px'}}>
+              {[1,2,3].map(p=>(
+                <div key={p} style={{display:'flex',flexDirection:'column',gap:'5px'}}>
+                  <label style={{fontSize:'11px',fontWeight:'500',color:'var(--text-muted)',textTransform:'uppercase',letterSpacing:'0.6px'}}>{p===1?'1st':p===2?'2nd':p===3?'3rd':`${p}th`} Place</label>
+                  <div style={{display:'flex',alignItems:'center',border:'1px solid var(--border)',borderRadius:'8px',overflow:'hidden',background:'white'}}>
+                    <span style={{padding:'9px 8px 9px 12px',fontSize:'14px',color:'var(--text-muted)'}}>$</span>
+                    <input type="number" min="0" value={payouts[p]} onChange={e=>setPayouts(prev=>{const next={...prev,[p]:e.target.value};try{localStorage.setItem('pickem_payouts',JSON.stringify(next));}catch{}return next;})} placeholder="0" style={{border:'none',outline:'none',padding:'9px 12px 9px 4px',fontSize:'14px',fontFamily:"'Inter',sans-serif",width:'100%',background:'transparent'}} />
+                  </div>
+                </div>
+              ))}
+            </div>
+            {Object.values(payouts).some(v=>v)&&(
+              <div style={{marginTop:'10px',fontSize:'12px',color:'var(--green)'}}>
+                Total pot: ${Object.values(payouts).reduce((s,v)=>s+(parseFloat(v)||0),0).toLocaleString()}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {tab==='entries'&&(
+        <div className="card">
+          <div className="card-header">
+            <h2>All Entries ({entries.length})</h2>
+            <div style={{fontSize:'12px',color:'var(--text-muted)'}}>Click Edit to change picks before the tournament starts</div>
+          </div>
+          <div style={{overflowX:'auto'}}>
+            <table className="admin-table">
+              <thead><tr><th>#</th><th>Name</th><th>G1</th><th>G2</th><th>G3</th><th>G4</th><th>G5</th><th>G6</th><th>TB Amat</th><th>TB Birds</th><th>Score</th><th>Date</th><th></th></tr></thead>
+              <tbody>{entries.map((e,i)=>{
+                const s=standings.find(x=>x.id===e.id);
+                return (
+                  <tr key={e.id}>
+                    <td style={{color:'var(--text-muted)'}}>{i+1}</td>
+                    <td style={{fontWeight:'500'}}>{e.participant_name}</td>
+                    <td>{e.group1_pick?.split(' ').slice(-1)[0]}</td>
+                    <td>{e.group2_pick?.split(' ').slice(-1)[0]}</td>
+                    <td>{e.group3_pick?.split(' ').slice(-1)[0]}</td>
+                    <td>{e.group4_pick?.split(' ').slice(-1)[0]}</td>
+                    <td>{e.group5_pick?.split(' ').slice(-1)[0]}</td>
+                    <td>{e.group6_pick?.split(' ').slice(-1)[0]}</td>
+                    <td>{e.tiebreaker_amateur?.split(' ').slice(-1)[0]}</td>
+                    <td>{e.tiebreaker_birdies}</td>
+                    <td><span className={`score-val ${sc(s?.totalScore)}`} style={{fontWeight:'600'}}>{s?fmt(s.totalScore):'—'}</span></td>
+                    <td style={{color:'var(--text-muted)'}}>{new Date(e.created_at).toLocaleDateString()}</td>
+                    <td style={{display:'flex',gap:'6px'}}>
+                      <button className="btn btn-outline btn-sm" onClick={()=>setEditing(e)}>Edit</button>
+                      <button className="btn btn-sm" style={{background:'transparent',border:'1px solid var(--red)',color:'var(--red)'}} onClick={()=>setConfirmDelete(e)}>Delete</button>
+                    </td>
+                  </tr>
+                );
+              })}</tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {tab==='qa'&&(
+        <div className="card">
+          <div className="card-header"><h2>Field QA</h2><div style={{fontSize:'12px',color:'var(--text-muted)'}}>ESPN names vs your defined field</div></div>
+          <div className="card-body">
+            {(()=>{
+              const fieldNames = MOCK_FIELD.map(p=>p.name);
+              const espnNames = espnField.map(p=>p.name);
+              if (espnNames.length===0) return <div style={{padding:'20px',color:'var(--text-muted)',fontSize:'13px'}}>No ESPN data yet — force refresh or wait for tee times to be posted.</div>;
+              const matched = fieldNames.filter(n=>espnNames.includes(n));
+              const missingFromEspn = fieldNames.filter(n=>!espnNames.includes(n));
+              const notInOurField = espnNames.filter(n=>!fieldNames.includes(n));
+              return (
+                <div style={{display:'grid',gap:'20px'}}>
+                  <div style={{background:'rgba(26,71,42,0.06)',borderRadius:'10px',padding:'16px'}}>
+                    <div style={{fontWeight:'600',color:'var(--green)',marginBottom:'8px'}}>✅ Matched ({matched.length})</div>
+                    <div style={{fontSize:'12px',color:'var(--text-muted)',lineHeight:'1.8'}}>{matched.join(', ')}</div>
+                  </div>
+                  {missingFromEspn.length>0&&<div style={{background:'rgba(192,57,43,0.06)',borderRadius:'10px',padding:'16px'}}>
+                    <div style={{fontWeight:'600',color:'var(--red)',marginBottom:'8px'}}>⚠️ In our field but NOT on ESPN ({missingFromEspn.length}) — name mismatch or WD</div>
+                    <div style={{fontSize:'12px',lineHeight:'1.8'}}>{missingFromEspn.map(n=><div key={n} style={{padding:'4px 0',borderBottom:'1px solid var(--border)'}}><strong>{n}</strong></div>)}</div>
+                  </div>}
+                  {notInOurField.length>0&&<div style={{background:'rgba(201,168,76,0.08)',borderRadius:'10px',padding:'16px'}}>
+                    <div style={{fontWeight:'600',color:'var(--gold)',marginBottom:'8px'}}>⚠️ On ESPN but NOT in our field ({notInOurField.length}) — missing player</div>
+                    <div style={{fontSize:'12px',lineHeight:'1.8'}}>{notInOurField.map(n=><div key={n} style={{padding:'4px 0',borderBottom:'1px solid var(--border)'}}><strong>{n}</strong></div>)}</div>
+                  </div>}
+                </div>
+              );
+            })()}
+          </div>
+        </div>
+      )}
+
+      {tab==='tiebreakers'&&(
+        <div className="card">
+          <div className="card-header"><h2>Tiebreaker Resolution</h2></div>
+          <div className="card-body">
+            <div style={{maxWidth:'600px'}}>
+              <div className="form-field" style={{marginBottom:'20px'}}>
+                <label>Actual Final Round Birdie Count (T10 and above)</label>
+                <div style={{display:'flex',gap:'8px',alignItems:'center'}}>
+                  <input type="number" value={birdieCount} onChange={e=>setBirdieCount(e.target.value)} placeholder="Enter actual count" style={{width:'140px'}} />
+                </div>
+                <small style={{fontSize:'11px',color:'var(--text-muted)',marginTop:'3px'}}>Enter after the final round to see who was closest</small>
+              </div>
+              <div className="tiebreaker-panel">
+                <h4>Birdie Tiebreaker — All Entries</h4>
+                {entries.length===0?<p style={{fontSize:'13px',color:'var(--text-muted)'}}>No entries yet.</p>:(
+                  [...entries].sort((a,b)=>{
+                    if(!birdieCount)return 0;
+                    return Math.abs(a.tiebreaker_birdies-parseInt(birdieCount))-Math.abs(b.tiebreaker_birdies-parseInt(birdieCount));
+                  }).map(e=>{
+                    const diff=birdieCount?Math.abs(e.tiebreaker_birdies-parseInt(birdieCount)):null;
+                    return (
+                      <div key={e.id} className="tiebreaker-row">
+                        <span style={{fontWeight:'500',minWidth:'140px'}}>{e.participant_name}</span>
+                        <span style={{color:'var(--text-muted)',fontSize:'12px'}}>Guessed <strong style={{color:'var(--text)'}}>{e.tiebreaker_birdies}</strong></span>
+                        {birdieCount&&<span style={{color:'var(--green-light)',fontSize:'12px',fontWeight:'500'}}>Off by {diff}</span>}
+                        <span style={{color:'var(--text-muted)',fontSize:'12px'}}>Amateur: {e.tiebreaker_amateur?.split(' ').slice(-1)[0]}</span>
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
